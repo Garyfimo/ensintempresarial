@@ -39,7 +39,7 @@
             <EditText
                 android:id="@+id/password_text"
                 android:password="true"
-                android:hint="*********"
+                android:hint="*****"
                 android:layout_gravity="center"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
