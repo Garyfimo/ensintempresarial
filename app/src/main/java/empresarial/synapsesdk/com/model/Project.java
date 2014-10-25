@@ -5,60 +5,131 @@ package empresarial.synapsesdk.com.model;
  */
 public class Project {
 
-    private int id;
-    private String title;
-    private String sub_title;
-    private String resume;
-    private int image;
+    private int idProyecto;
+    private String nombre;
+    private String descripcion;
+    private String descripcionPabellones;
+    private String descripcionAcabados;
+    private String descripcionServicios;
+    private String imagenComplejoURL;
+    private String imagenGoogleMaps;
+    private String fechaInicio;
+    private String fechaFin;
+    private String presupuestoTotal;
+    private String[] indicadores;
 
     public Project() {
     }
 
-    public Project(int id, String title, String sub_title, String resume, int image) {
-        this.title = title;
-        this.sub_title = sub_title;
-        this.resume = resume;
-        this.image = image;
-        this.id = id;
+    public Project(int idProyecto, String nombre, String descripcion, String descripcionPabellones, String descripcionAcabados, String descripcionServicios, String imagenComplejoURL, String imagenGoogleMaps, String fechaInicio, String fechaFin, String presupuestoTotal, String[] indicadores) {
+        this.idProyecto = idProyecto;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.descripcionPabellones = descripcionPabellones;
+        this.descripcionAcabados = descripcionAcabados;
+        this.descripcionServicios = descripcionServicios;
+        this.imagenComplejoURL = imagenComplejoURL;
+        this.imagenGoogleMaps = imagenGoogleMaps;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.presupuestoTotal = presupuestoTotal;
+        this.indicadores = indicadores;
     }
 
-    public int getId() {
-        return id;
+
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public String getTitle() {
-        return title;
+    public int getIdProyecto() {
+        return idProyecto;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setIdProyecto(int idProyecto) {
+        this.idProyecto = idProyecto;
     }
 
-    public String getSub_title() {
-        return sub_title;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setSub_title(String sub_title) {
-        this.sub_title = sub_title;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getResume() {
-        return resume;
+    public String getDescripcionPabellones() {
+        return descripcionPabellones;
     }
 
-    public void setResume(String resume) {
-        this.resume = resume;
+    public void setDescripcionPabellones(String descripcionPabellones) {
+        this.descripcionPabellones = descripcionPabellones;
     }
 
-    public int getImage() {
-        return image;
+    public String getDescripcionAcabados() {
+        return descripcionAcabados;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setDescripcionAcabados(String descripcionAcabados) {
+        this.descripcionAcabados = descripcionAcabados;
+    }
+
+    public String getDescripcionServicios() {
+        return descripcionServicios;
+    }
+
+    public void setDescripcionServicios(String descripcionServicios) {
+        this.descripcionServicios = descripcionServicios;
+    }
+
+    public String getImagenComplejoURL() {
+        return imagenComplejoURL;
+    }
+
+    public void setImagenComplejoURL(String imagenComplejoURL) {
+        this.imagenComplejoURL = imagenComplejoURL;
+    }
+
+    public String getImagenGoogleMaps() {
+        return imagenGoogleMaps;
+    }
+
+    public void setImagenGoogleMaps(String imagenGoogleMaps) {
+        this.imagenGoogleMaps = imagenGoogleMaps;
+    }
+
+    public String getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public String getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(String fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public String getPresupuestoTotal() {
+        return presupuestoTotal;
+    }
+
+    public void setPresupuestoTotal(String presupuestoTotal) {
+        this.presupuestoTotal = presupuestoTotal;
+    }
+
+    public String[] getIndicadores() {
+        return indicadores;
+    }
+
+    public void setIndicadores(String[] indicadores) {
+        this.indicadores = indicadores;
     }
 }

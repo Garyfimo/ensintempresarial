@@ -2,4 +2,6 @@
 <resources>
     <color name="titles_state">#2ecc71</color>
     <color name="titles_project">#16a085</color>
+    <color name="white">#FFFFFF</color>
+    <color name="silver">#ecf0f1</color>
 </resources>

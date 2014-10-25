@@ -4,7 +4,8 @@
     <string name="app_name">EnsIntEmpresarial</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_project">Project</string>
+    <string name="title_activity_project">Proyectos</string>
     <string name="title_activity_description">Descripcion</string>
+    <string name="title_activity_progress">ProgressActivity</string>
 
 </resources>

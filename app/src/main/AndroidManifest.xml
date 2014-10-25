@@ -40,7 +40,26 @@
 
         <activity
             android:name=".DescriptionActivity"
-            android:label="@string/title_activity_description" >
+            android:label="@string/title_activity_description"
+            android:screenOrientation="landscape" >
+        </activity>
+
+        <receiver
+            android:name="empresarial.synapsesdk.com.service.GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="empresarial.synapsesdk.com" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="empresarial.synapsesdk.com.service.GCMIntentService" />
+
+        <activity
+            android:name=".ProgressActivity"
+            android:label="@string/title_activity_progress"
+            android:screenOrientation="landscape" >
         </activity>
     </application>
 

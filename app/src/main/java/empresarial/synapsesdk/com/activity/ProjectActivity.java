@@ -19,9 +19,19 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,6 +43,7 @@ import empresarial.synapsesdk.com.activity.R;
 import empresarial.synapsesdk.com.adapter.ImageAdapter;
 import empresarial.synapsesdk.com.adapter.ProjectAdapter;
 import empresarial.synapsesdk.com.model.Project;
+import empresarial.synapsesdk.com.model.User;
 import empresarial.synapsesdk.com.service.GsonRequest;
 import empresarial.synapsesdk.com.service.VolleyApplication;
 
@@ -42,15 +53,15 @@ public class ProjectActivity extends Activity {
     private static final String PROPERTY_APP_VERSION = "appVersion";
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
-    ArrayList<Project> lista_proyectos;
-
-    String SENDER_ID = "50887828571";
+    String SENDER_ID = "523530939055";
     static final String TAG = "GCM Demo";
     GoogleCloudMessaging gcm;
     AtomicInteger msgId = new AtomicInteger();
     Context context;
     String regid;
     String username;
+
+    public ArrayList<Project> lista_proyectos;
 
     @InjectView(R.id.project_gridview) GridView gridView;
 
@@ -60,12 +71,13 @@ public class ProjectActivity extends Activity {
         setContentView(R.layout.activity_project);
 
         ButterKnife.inject(ProjectActivity.this);
-
+        lista_proyectos = new ArrayList<Project>();
         context = getApplicationContext();
 
 
-        setData();
+        setData(); //intensive hardcode
 
+        Log.i("size", lista_proyectos.size() + "");
 
         Intent intent = getIntent();
         username = intent.getStringExtra("user");
@@ -81,13 +93,16 @@ public class ProjectActivity extends Activity {
             Log.i(TAG, "No valid Google Play Services APK found.");
         }
 
-        gridView.setAdapter(new ProjectAdapter(this,lista_proyectos));
+
+        //Log.i("id", lista_proyectos.get(1).getIdProyecto() + "");
+
+
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Toast.makeText(ProjectActivity.this, "" + position, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ProjectActivity.this, DescriptionActivity.class);
-                intent.putExtra("id",lista_proyectos.get(position).getId());
+                intent.putExtra("id",lista_proyectos.get(position).getIdProyecto()+"");
                 startActivity(intent);
             }
         });
@@ -215,7 +230,8 @@ public class ProjectActivity extends Activity {
 
         Log.i("username",username);
         String url = String.format("http://upcsistemas.com/ensint/api/auth/gcm?username=%s",username);
-        String body = String.format("\"gcmCode\":\"%s\"", regid);
+        Log.i("regid",regid);
+        String body = String.format("{\"gcmCode\":\"%s\"}", regid);
         GsonRequest request = new GsonRequest(Request.Method.POST,url, body,Boolean.class,null,new Response.Listener() {
             @Override
             public void onResponse(Object response) {
@@ -232,14 +248,59 @@ public class ProjectActivity extends Activity {
 
     }
 
-    void setData(){
-        lista_proyectos = new ArrayList<Project>();
-        lista_proyectos.add(new Project(1,"Los Parques del Callao", "Condominio" ,"Areas (desde-hasta): Departamentos en primer piso desde 61.5m2 hasta 62.6m2, " +
-                "departamentos del 2do piso en adelante desde 64.4m2 hasta 65.6m2\n Estacionamientos disponibles: 112 estacionamientos para el Condominio I"
-                , R.drawable.parques_del_callao));
-       // for (int i = 1 ; i <= 25; i++) {
-       //     lista_proyectos.add(new Project(i,"Titulo" + i, "SubTitulo" + i,"Resume" + i, R.drawable.project));
-       // }
+     void setData(){
+        String url = "http://upcsistemas.com/ensint/api/proyectos";
+        JsonObjectRequest request = new JsonObjectRequest(url, null,new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                Gson gson = gsonBuilder.create();
+
+
+                Log.i("JSONObject",response.toString());
+
+                try {
+                    Log.i("hayMasItems",response.getString("hayMasItems"));
+                    boolean a = response.getString("hayMasItems").equals("false");
+                    Log.i("boolean", a+"");
+                    if(!response.getString("hayMasItems").equals("false")){
+
+                    }else{
+                    Log.i("JSONObject2",response.getString("proyectos") + "");
+                    Log.i("JSONObject2[0]",response.getJSONArray("proyectos").get(0)  + "");
+                    JSONArray proyectos = response.getJSONArray("proyectos");
+                    for(int i = 0; i < proyectos.length(); i++)
+                        {
+                            JSONObject proyectoJson = (JSONObject) proyectos.get(i);
+                            Project proyecto = gson.fromJson(proyectoJson.toString(),Project.class);
+                            lista_proyectos.add(proyecto);
+                           // Log.i("imagenGoogleMaps",proyectoJson.getString("imagenGoogleMaps"));
+                            Log.i("id", lista_proyectos.get(i).getIdProyecto() + "");
+                        }
+                    gridView.setAdapter(new ProjectAdapter(ProjectActivity.this,lista_proyectos));
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("ERROR: ", error.toString());
+                    }
+                }
+        );
+
+
+        VolleyApplication.getInstance().getRequestQueue().add(request);
+
+        //Log.i("id", lista_proyectos.get(0).getIdProyecto() + "");
+
     }
 
 }

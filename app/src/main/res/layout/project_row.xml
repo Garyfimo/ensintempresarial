@@ -3,6 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@drawable/card_background"
     android:padding="15dp" >
 
     <ImageView
@@ -13,7 +14,7 @@
         android:scaleType="fitXY">
     </ImageView>
     <TextView
-        android:text="Title"
+
         android:id="@+id/project_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,7 +24,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge">
     </TextView>
     <TextView
-        android:text="Subtitle"
+
         android:id="@+id/project_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +33,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium">
     </TextView>
     <TextView
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
         android:id="@+id/project_resume"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

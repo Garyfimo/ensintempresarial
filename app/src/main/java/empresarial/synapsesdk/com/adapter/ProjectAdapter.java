@@ -1,6 +1,9 @@
 package empresarial.synapsesdk.com.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +11,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
@@ -27,7 +34,10 @@ public class ProjectAdapter extends BaseAdapter {
     public ProjectAdapter(Context context, ArrayList<Project> projects) {
         mContext = context;
         this.projects = projects;
+
+        Log.i("Estoy en ", "ProjectAdaparte");
     }
+
 
     @Override
     public int getCount() {
@@ -58,10 +68,17 @@ public class ProjectAdapter extends BaseAdapter {
             view.setTag(holder);
         }
 
-        holder.project_image.setImageResource(projects.get(position).getImage());
-        holder.project_title.setText(projects.get(position).getTitle());
-        holder.project_subtitle.setText(projects.get(position).getSub_title());
-        holder.project_resume.setText(projects.get(position).getResume());
+
+        holder.project_image.setImageDrawable(getImageFromURL(projects.get(position).getImagenComplejoURL()));
+        holder.project_title.setText(projects.get(position).getNombre());
+       // holder.project_subtitle.setText(projects.get(position).getDescripcion());
+        holder.project_resume.setText(projects.get(position).getDescripcion());
+        Log.i("getDescription", projects.get(position).getDescripcion());
+
+        //String fontPath = "fonts/Bebas Neue Bold.ttf";
+        //Typeface tf = Typeface.createFromAsset(mContext.getAssets(), fontPath);
+
+        //holder.project_title.setTypeface(tf);
 
         return view;
     }
@@ -72,8 +89,20 @@ public class ProjectAdapter extends BaseAdapter {
        @InjectView(R.id.project_subtitle) TextView project_subtitle;
        @InjectView(R.id.project_resume) TextView project_resume;
 
+
        public ProjectViewHolder(View view){
            ButterKnife.inject(this,view);
        }
+
+    }
+
+    public static Drawable getImageFromURL(String url) {
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, "src name");
+            return d;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

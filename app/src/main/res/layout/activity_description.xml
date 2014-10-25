@@ -21,24 +21,23 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Servicios"
-        android:layout_marginLeft="20dp"
         android:id="@+id/servicios_title"
         android:textColor="@color/titles_state"
         android:textSize="38dp"
-        android:layout_alignTop="@+id/project_image"
-        android:layout_toRightOf="@+id/project_image"
-        android:layout_toEndOf="@+id/project_image" />
+        android:layout_toEndOf="@+id/project_image"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/servicios_description"
+        android:layout_alignStart="@+id/servicios_description" />
 
     <TextView
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+
         android:id="@+id/servicios_description"
         android:layout_below="@+id/servicios_title"
-        android:layout_centerHorizontal="true"
-        android:layout_alignLeft="@+id/servicios_title"
-        android:layout_alignStart="@+id/servicios_title"/>
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -56,7 +55,7 @@
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+
         android:id="@+id/acabados_description"
         android:layout_below="@+id/acabados_title"
         android:layout_alignLeft="@+id/servicios_title"
@@ -79,7 +78,7 @@
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+
         android:id="@+id/infraestructura_description"
         android:layout_below="@+id/infraestructura_title"
         android:layout_centerHorizontal="true"
@@ -90,7 +89,7 @@
         android:layout_width="450dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Los Parques de Callao"
+
         android:id="@+id/project_title_description"
         android:textSize="35dp"
         android:textColor="@color/titles_project"
@@ -102,7 +101,7 @@
         android:layout_width="450dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Condominio"
+
         android:textSize="30dp"
         android:textColor="@color/titles_project"
         android:id="@+id/project_subtitle_description"
@@ -114,9 +113,31 @@
         android:layout_width="450dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+
         android:id="@+id/project_resume_description"
         android:layout_below="@+id/project_subtitle_description"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/project_image"
+        android:layout_alignEnd="@+id/project_image" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="DISPONIBILIDAD"
+        android:id="@+id/textView"
+        android:layout_below="@+id/project_resume_description"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+
+        android:id="@+id/textView2"
+        android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -124,57 +145,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="DISPONIBILIDAD"
-        android:id="@+id/textView13"
-        android:layout_alignTop="@+id/servicios_title"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <ImageView
-        android:layout_width="190dp"
-        android:layout_height="150dp"
-        android:id="@+id/imageView"
-        android:src="@drawable/project"
-        android:layout_below="@+id/textView13"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="RENDIMIENTO"
-        android:id="@+id/textView14"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:id="@+id/textView3"
+        android:layout_alignTop="@+id/textView"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_marginLeft="200dp"
+        android:background="@color/silver"/>
 
-    <ImageView
-        android:layout_width="190dp"
-        android:layout_height="150dp"
-        android:src="@drawable/project"
-        android:layout_alignBottom="@+id/project_subtitle_description"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+
+        android:id="@+id/textView5"
+        android:layout_below="@+id/textView3"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="CALIDAD"
-        android:id="@+id/textView15"
-        android:layout_below="@+id/project_subtitle_description"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:text="INFRAESTRUCTURA"
+        android:id="@+id/textView6"
+        android:layout_above="@+id/textView5"
+        android:layout_toRightOf="@+id/textView5"
+        android:layout_toEndOf="@+id/textView5"
+        android:layout_marginLeft="180dp" />
 
-    <ImageView
-        android:layout_width="190dp"
-        android:layout_height="150dp"
-        android:src="@drawable/project"
-        android:id="@+id/imageView4"
-        android:layout_below="@+id/textView15"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+
+        android:id="@+id/textView7"
+        android:layout_below="@+id/textView6"
+        android:layout_alignLeft="@+id/textView6"
+        android:layout_alignStart="@+id/textView6" />
 
 
 </RelativeLayout>
