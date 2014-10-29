@@ -24,6 +24,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import empresarial.synapsesdk.com.model.User;
 import empresarial.synapsesdk.com.service.VolleyApplication;
+import empresarial.synapsesdk.com.util.AccountUtils;
 
 
 public class LoginActivity extends Activity {
@@ -65,9 +66,11 @@ public class LoginActivity extends Activity {
             Log.i("response: ", response.toString());
             if(user.getIdUsuario() != -1) {
                 // Toast.makeText(LoginActivity.this, "LOGIN", Toast.LENGTH_LONG).show();
+                AccountUtils.registerAccount(LoginActivity.this, user);
                 Intent i = new Intent(LoginActivity.this, ProjectActivity.class);
                 i.putExtra("user",user.getUsername());
                 startActivity(i);
+                finish();
             }
         }
     },

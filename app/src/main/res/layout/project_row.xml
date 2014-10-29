@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/card_background"
+    android:layout_margin="3dp"
     android:padding="15dp" >
 
     <ImageView
@@ -13,7 +14,7 @@
         android:layout_height="220dp"
         android:scaleType="fitXY">
     </ImageView>
-    <TextView
+    <empresarial.synapsesdk.com.widget.TextViewFont
 
         android:id="@+id/project_title"
         android:layout_width="wrap_content"
@@ -21,8 +22,8 @@
         android:textColor="@color/titles_project"
         android:layout_marginTop="10dp"
         android:textSize="18sp"
-        android:textAppearance="?android:attr/textAppearanceLarge">
-    </TextView>
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
     <TextView
 
         android:id="@+id/project_subtitle"

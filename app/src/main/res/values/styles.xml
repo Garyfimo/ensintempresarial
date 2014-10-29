@@ -3,6 +3,11 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">@style/AppTheme.ActionBar</item>
+    </style>
+
+    <style name="AppTheme.ActionBar" parent="android:Widget.ActionBar">
+        <item name="android:background">@color/bar_menu</item>
     </style>
 
 </resources>

@@ -16,7 +16,7 @@
         android:scaleType="fitXY">
     </ImageView>
 
-    <TextView
+    <empresarial.synapsesdk.com.widget.TextViewFont
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -24,7 +24,7 @@
         android:id="@+id/servicios_title"
         android:textColor="@color/titles_state"
         android:textSize="38dp"
-        android:layout_toEndOf="@+id/project_image"
+        android:layout_toRightOf="@+id/project_image"
         android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/servicios_description"
         android:layout_alignStart="@+id/servicios_description" />
@@ -39,7 +39,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <TextView
+    <empresarial.synapsesdk.com.widget.TextViewFont
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -61,7 +61,7 @@
         android:layout_alignLeft="@+id/servicios_title"
         android:layout_alignStart="@+id/servicios_title" />
 
-    <TextView
+    <empresarial.synapsesdk.com.widget.TextViewFont
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -85,7 +85,7 @@
         android:layout_alignLeft="@+id/servicios_title"
         android:layout_alignStart="@+id/servicios_title"/>
 
-    <TextView
+    <empresarial.synapsesdk.com.widget.TextViewFont
         android:layout_width="450dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -121,7 +121,7 @@
         android:layout_alignRight="@+id/project_image"
         android:layout_alignEnd="@+id/project_image" />
 
-    <TextView
+    <empresarial.synapsesdk.com.widget.TextViewFont
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -141,7 +141,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <TextView
+    <empresarial.synapsesdk.com.widget.TextViewFont
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -163,7 +163,7 @@
         android:layout_alignLeft="@+id/textView3"
         android:layout_alignStart="@+id/textView3" />
 
-    <TextView
+    <empresarial.synapsesdk.com.widget.TextViewFont
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"

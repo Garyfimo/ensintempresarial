@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -13,6 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -34,6 +36,8 @@ public class DescriptionActivity extends Activity {
     @InjectView(R.id.project_title_description) TextView project_title_description;
     @InjectView(R.id.project_subtitle_description) TextView project_subtitle_description;
     @InjectView(R.id.project_resume_description) TextView project_resume_description;
+    @InjectView(R.id.project_image)
+    ImageView project_image;
 
 
     String project_id ;
@@ -93,6 +97,7 @@ public class DescriptionActivity extends Activity {
                 infraestructura_description.setText(project.getDescripcionPabellones());
                 project_title_description.setText(project.getNombre());
                 project_resume_description.setText(project.getDescripcion());
+                Picasso.with(DescriptionActivity.this).load(project.getImagenComplejoURL()).into(project_image);
                 Log.i("indicadores", project.getIndicadores() + "");
 
             }

@@ -11,6 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -69,7 +71,9 @@ public class ProjectAdapter extends BaseAdapter {
         }
 
 
-        holder.project_image.setImageDrawable(getImageFromURL(projects.get(position).getImagenComplejoURL()));
+        Picasso.with(mContext).load(projects.get(position).getImagenComplejoURL()).into(holder.project_image);
+
+        //holder.project_image.setImageDrawable(getImageFromURL(projects.get(position).getImagenComplejoURL()));
         holder.project_title.setText(projects.get(position).getNombre());
        // holder.project_subtitle.setText(projects.get(position).getDescripcion());
         holder.project_resume.setText(projects.get(position).getDescripcion());

@@ -1,18 +1,18 @@
 package empresarial.synapsesdk.com.service;
 
 import android.app.Application;
+import android.graphics.Typeface;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-/**
- * Created by Garyfimo on 10/16/14.
- */
 public class VolleyApplication extends Application {
 
     private static VolleyApplication sInstance;
 
     private RequestQueue mRequestQueue;
+
+    private Typeface bebasNeueLigthFont;
 
     @Override
     public void onCreate() {
@@ -21,6 +21,8 @@ public class VolleyApplication extends Application {
         mRequestQueue = Volley.newRequestQueue(this);
 
         sInstance = this;
+
+        bebasNeueLigthFont = Typeface.createFromAsset(getAssets(), "fonts/bebas_neue_regular.ttf");
     }
 
     public synchronized static VolleyApplication getInstance() {
@@ -29,5 +31,9 @@ public class VolleyApplication extends Application {
 
     public RequestQueue getRequestQueue() {
         return mRequestQueue;
+    }
+
+    public Typeface getBebasNeueLigthFont() {
+        return bebasNeueLigthFont;
     }
 }

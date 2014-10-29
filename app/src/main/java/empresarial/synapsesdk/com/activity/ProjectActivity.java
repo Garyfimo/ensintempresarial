@@ -46,6 +46,7 @@ import empresarial.synapsesdk.com.model.Project;
 import empresarial.synapsesdk.com.model.User;
 import empresarial.synapsesdk.com.service.GsonRequest;
 import empresarial.synapsesdk.com.service.VolleyApplication;
+import empresarial.synapsesdk.com.util.AccountUtils;
 
 public class ProjectActivity extends Activity {
 
@@ -68,6 +69,13 @@ public class ProjectActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(!AccountUtils.isAuthenticated(this)){
+            AccountUtils.startAuthenticationFlow(this);
+            finish();
+            return;
+        }
+        setTitle(getString(R.string.title_activity_project));
         setContentView(R.layout.activity_project);
 
         ButterKnife.inject(ProjectActivity.this);
@@ -228,7 +236,7 @@ public class ProjectActivity extends Activity {
 
     private void sendRegistrationIdToBackend() {
 
-        Log.i("username",username);
+        Log.i("username",":" + username);
         String url = String.format("http://upcsistemas.com/ensint/api/auth/gcm?username=%s",username);
         Log.i("regid",regid);
         String body = String.format("{\"gcmCode\":\"%s\"}", regid);

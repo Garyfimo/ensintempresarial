@@ -19,7 +19,7 @@
             android:orientation="vertical"
             android:scrollbarStyle="insideOverlay"
             android:scrollbars="vertical">
-            <TextView
+            <empresarial.synapsesdk.com.widget.TextViewFont
                 android:id="@+id/login"
                 android:text="LOGIN"
                 android:textSize="35dp"
@@ -36,10 +36,15 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="20dp"
+                android:inputType="textVisiblePassword"
+                android:maxLines="1"
+                android:singleLine="true"
                 />
             <EditText
                 android:id="@+id/password_text"
-                android:password="true"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:hint="*****"
                 android:layout_gravity="center"
                 android:layout_width="180dp"
