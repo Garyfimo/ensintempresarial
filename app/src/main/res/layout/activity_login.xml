@@ -52,7 +52,7 @@
                 android:layout_marginBottom="20dp"/>
 
             <Button
-                android:id="@+id/login_button"
+                android:id="@+id/button_login"
                 android:text="LOGIN"
                 android:layout_gravity="center"
                 android:textColorHighlight="#3498db"

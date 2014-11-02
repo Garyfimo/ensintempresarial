@@ -32,7 +32,7 @@ public class LoginActivity extends Activity {
 
     @InjectView(R.id.user_text) EditText user_text;
     @InjectView(R.id.password_text) EditText password_text;
-    @InjectView(R.id.login_button) Button login_button;
+    @InjectView(R.id.button_login) Button login_button;
 
     User user;
 
@@ -45,7 +45,7 @@ public class LoginActivity extends Activity {
 
     }
 
-    @OnClick(R.id.login_button)
+    @OnClick(R.id.button_login)
     public void onClick()
     {
 
