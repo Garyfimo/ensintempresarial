@@ -90,7 +90,6 @@ public class ProjectAdapter extends BaseAdapter {
     static class ProjectViewHolder{
        @InjectView(R.id.project_image) ImageView project_image;
        @InjectView(R.id.project_title) TextView project_title;
-       @InjectView(R.id.project_subtitle) TextView project_subtitle;
        @InjectView(R.id.project_resume) TextView project_resume;
 
 

@@ -5,37 +5,31 @@
     android:orientation="vertical"
     android:background="@drawable/card_background"
     android:layout_margin="3dp"
-    android:padding="15dp" >
+    android:padding="2dp">
 
     <ImageView
         android:id="@+id/project_image"
         android:src="@drawable/project"
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
         android:layout_height="220dp"
         android:scaleType="fitXY">
     </ImageView>
     <empresarial.synapsesdk.com.widget.TextViewFont
-
         android:id="@+id/project_title"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/titles_project"
-        android:layout_marginTop="10dp"
-        android:textSize="18sp"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        android:paddingTop="@dimen/mini"
+        android:paddingLeft="@dimen/normal"
+        android:paddingRight="@dimen/normal"/>
 
     <TextView
-
-        android:id="@+id/project_subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/titles_project"
-        android:textSize="16sp"
-        android:textAppearance="?android:attr/textAppearanceMedium">
-    </TextView>
-    <TextView
-
         android:id="@+id/project_resume"
+        android:paddingTop="@dimen/mini"
+        android:paddingLeft="@dimen/normal"
+        android:paddingRight="@dimen/normal"
+        android:paddingBottom="@dimen/normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"

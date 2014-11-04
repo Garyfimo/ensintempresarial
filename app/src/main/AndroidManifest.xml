@@ -41,6 +41,7 @@
         <activity
             android:name=".DescriptionActivity"
             android:label="@string/title_activity_description"
+            android:windowSoftInputMode="adjustResize|stateHidden"
             android:screenOrientation="landscape" >
         </activity>
 

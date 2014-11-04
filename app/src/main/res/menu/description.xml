@@ -4,7 +4,8 @@
 
         <item
             android:id="@+id/button_share"
-            android:title="Share"
+            android:title="Compartir"
+            android:showAsAction="ifRoom"
             android:icon="@android:drawable/ic_menu_share"
         />
 
