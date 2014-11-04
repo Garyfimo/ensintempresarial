@@ -2,6 +2,7 @@ package empresarial.synapsesdk.com.activity;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -38,28 +39,26 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.Optional;
+import empresarial.synapsesdk.com.adapter.MenuAdapter;
 import empresarial.synapsesdk.com.adapter.ProjectAdapter;
 import empresarial.synapsesdk.com.model.Project;
 import empresarial.synapsesdk.com.model.User;
 import empresarial.synapsesdk.com.service.VolleyApplication;
+import empresarial.synapsesdk.com.util.Utilitario;
 
 
 public class DescriptionActivity extends Activity implements
         AdapterView.OnItemClickListener {
 
-    //@InjectView(R.id.servicios_title) TextView servicios_title;
+
     @InjectView(R.id.servicios_description)
     TextView servicios_description;
-    //@InjectView(R.id.acabados_title) TextView acabados_title;
     @InjectView(R.id.acabados_description)
     TextView acabados_description;
-    //@InjectView(R.id.infraestructura_title) TextView infraestructura_title;
     @InjectView(R.id.infraestructura_description)
     TextView infraestructura_description;
     @InjectView(R.id.project_title_description)
     TextView project_title_description;
-    @InjectView(R.id.project_subtitle_description)
-    TextView project_subtitle_description;
     @InjectView(R.id.project_resume_description)
     TextView project_resume_description;
     @InjectView(R.id.project_image)
@@ -68,8 +67,6 @@ public class DescriptionActivity extends Activity implements
     public ArrayList<String> lista_compartir;
     private DrawerLayout mDrawer;
     private ListView mDrawerOptions;
-    private static final String[] values = {"Drawer 1", "Drawer 2", "Drawer 3"};
-
 
     String project_id;
     Project project;
@@ -112,7 +109,7 @@ public class DescriptionActivity extends Activity implements
         getActionBar().setHomeButtonEnabled(true);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mDrawerOptions.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values));
+        mDrawerOptions.setAdapter(new MenuAdapter(DescriptionActivity.this));
         mDrawerOptions.setOnItemClickListener(this);
     }
 
@@ -155,14 +152,11 @@ public class DescriptionActivity extends Activity implements
                     Log.i("Nombre", lista_compartir.get(i));
                 }
 
-                //search.setAdapter(adapter);
-
 
                 button_enviar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        // Toast.makeText(DescriptionActivity.this,"Leslie <3",Toast.LENGTH_LONG).show();
-
+                
 
                     }
                 });
@@ -302,17 +296,27 @@ public class DescriptionActivity extends Activity implements
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Toast.makeText(this, "Pulsado " + values[i], Toast.LENGTH_SHORT).show();
+        Log.i("AVANCE", Utilitario.AVANCE+"");
         Intent intent;
         switch (i) {
-            case 0:
+            case Utilitario.HOME:
+                break;
+            case Utilitario.VER:
+                break;
+            case Utilitario.UBICACION:
+                break;
+            case Utilitario.GALERIA:
+                break;
+            case Utilitario.PLAN:
+                break;
+            case Utilitario.RECURSOS:
+                break;
+            case Utilitario.AVANCE:
                 intent = new Intent(DescriptionActivity.this, ProgressActivity.class);
                 startActivity(intent);
-                finish();
+        //      finish();
                 break;
-            case 1:
-                break;
-            case 2:
+            case Utilitario.PABELLONES:
                 break;
             default:
                 break;
@@ -321,6 +325,25 @@ public class DescriptionActivity extends Activity implements
         mDrawer.closeDrawers();
 
     }
+
+   /* private void selectItem(int position) {
+        // Create a new fragment and specify the planet to show based on position
+        Fragment fragment = new PlanetFragment();
+        Bundle args = new Bundle();
+        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
+        fragment.setArguments(args);
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, fragment)
+                .commit();
+
+        // Highlight the selected item, update the title, and close the drawer
+        mDrawerList.setItemChecked(position, true);
+        setTitle(mPlanetTitles[position]);
+        mDrawerLayout.closeDrawer(mDrawerList);
+    } */
 
     void fromArrayListToArray(ArrayList<String> arrayList, String[] array) {
         for (int i = 0; i < arrayList.size(); i++) {

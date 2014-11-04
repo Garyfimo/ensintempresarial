@@ -19,15 +19,12 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,11 +36,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import empresarial.synapsesdk.com.activity.R;
-import empresarial.synapsesdk.com.adapter.ImageAdapter;
 import empresarial.synapsesdk.com.adapter.ProjectAdapter;
 import empresarial.synapsesdk.com.model.Project;
-import empresarial.synapsesdk.com.model.User;
 import empresarial.synapsesdk.com.service.GsonRequest;
 import empresarial.synapsesdk.com.service.VolleyApplication;
 import empresarial.synapsesdk.com.util.AccountUtils;
