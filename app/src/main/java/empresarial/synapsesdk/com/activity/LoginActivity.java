@@ -62,8 +62,8 @@ public class LoginActivity extends Activity {
             GsonBuilder gsonBuilder = new GsonBuilder();
             Gson gson = gsonBuilder.create();
             user = gson.fromJson(response.toString(),User.class);
-            Log.i("user.getNombre(): ", user.getNombre());
-            Log.i("response: ", response.toString());
+           // Log.i("user.getNombre(): ", user.getNombre());
+           // Log.i("response: ", response.toString());
             if(user.getIdUsuario() != -1) {
                 // Toast.makeText(LoginActivity.this, "LOGIN", Toast.LENGTH_LONG).show();
                 AccountUtils.registerAccount(LoginActivity.this, user);

@@ -79,7 +79,7 @@ public class ProjectActivity extends Activity {
 
         setData(); //intensive hardcode
 
-        Log.i("size", lista_proyectos.size() + "");
+       // Log.i("size", lista_proyectos.size() + "");
 
         Intent intent = getIntent();
         username = intent.getStringExtra("user");
@@ -105,6 +105,7 @@ public class ProjectActivity extends Activity {
                 Toast.makeText(ProjectActivity.this, "" + position, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ProjectActivity.this, DescriptionActivity.class);
                 intent.putExtra("id",lista_proyectos.get(position).getIdProyecto()+"");
+                intent.putExtra("username",username);
                 startActivity(intent);
             }
         });
@@ -230,14 +231,14 @@ public class ProjectActivity extends Activity {
 
     private void sendRegistrationIdToBackend() {
 
-        Log.i("username",":" + username);
+//        Log.i("username",":" + username);
         String url = String.format("http://upcsistemas.com/ensint/api/auth/gcm?username=%s",username);
-        Log.i("regid",regid);
+  //      Log.i("regid",regid);
         String body = String.format("{\"gcmCode\":\"%s\"}", regid);
         GsonRequest request = new GsonRequest(Request.Method.POST,url, body,Boolean.class,null,new Response.Listener() {
             @Override
             public void onResponse(Object response) {
-                  Log.i("response",response.toString());
+                //  Log.i("response",response.toString());
             }
         }, new Response.ErrorListener() {
             @Override
@@ -261,17 +262,17 @@ public class ProjectActivity extends Activity {
                 Gson gson = gsonBuilder.create();
 
 
-                Log.i("JSONObject",response.toString());
+                //    Log.i("JSONObject",response.toString());
 
                 try {
-                    Log.i("hayMasItems",response.getString("hayMasItems"));
+                //    Log.i("hayMasItems",response.getString("hayMasItems"));
                     boolean a = response.getString("hayMasItems").equals("false");
-                    Log.i("boolean", a+"");
+                //    Log.i("boolean", a+"");
                     if(!response.getString("hayMasItems").equals("false")){
 
                     }else{
-                    Log.i("JSONObject2",response.getString("proyectos") + "");
-                    Log.i("JSONObject2[0]",response.getJSONArray("proyectos").get(0)  + "");
+                //    Log.i("JSONObject2",response.getString("proyectos") + "");
+                //    Log.i("JSONObject2[0]",response.getJSONArray("proyectos").get(0)  + "");
                     JSONArray proyectos = response.getJSONArray("proyectos");
                     for(int i = 0; i < proyectos.length(); i++)
                         {
@@ -279,7 +280,7 @@ public class ProjectActivity extends Activity {
                             Project proyecto = gson.fromJson(proyectoJson.toString(),Project.class);
                             lista_proyectos.add(proyecto);
                            // Log.i("imagenGoogleMaps",proyectoJson.getString("imagenGoogleMaps"));
-                            Log.i("id", lista_proyectos.get(i).getIdProyecto() + "");
+                //            Log.i("id", lista_proyectos.get(i).getIdProyecto() + "");
                         }
                     gridView.setAdapter(new ProjectAdapter(ProjectActivity.this,lista_proyectos));
 

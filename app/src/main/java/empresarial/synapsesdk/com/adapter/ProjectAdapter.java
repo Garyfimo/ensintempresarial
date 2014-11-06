@@ -37,7 +37,7 @@ public class ProjectAdapter extends BaseAdapter {
         mContext = context;
         this.projects = projects;
 
-        Log.i("Estoy en ", "ProjectAdaparte");
+        //Log.i("Estoy en ", "ProjectAdaparte");
     }
 
 
@@ -87,25 +87,18 @@ public class ProjectAdapter extends BaseAdapter {
         return view;
     }
 
-    static class ProjectViewHolder{
-       @InjectView(R.id.project_image) ImageView project_image;
-       @InjectView(R.id.project_title) TextView project_title;
-       @InjectView(R.id.project_resume) TextView project_resume;
+    static class ProjectViewHolder {
+        @InjectView(R.id.project_image)
+        ImageView project_image;
+        @InjectView(R.id.project_title)
+        TextView project_title;
+        @InjectView(R.id.project_resume)
+        TextView project_resume;
 
 
-       public ProjectViewHolder(View view){
-           ButterKnife.inject(this,view);
-       }
-
-    }
-
-    public static Drawable getImageFromURL(String url) {
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "src name");
-            return d;
-        } catch (Exception e) {
-            return null;
+        public ProjectViewHolder(View view) {
+            ButterKnife.inject(this, view);
         }
+
     }
 }

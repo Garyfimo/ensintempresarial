@@ -23,6 +23,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -34,6 +35,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
@@ -41,8 +43,11 @@ import butterknife.InjectView;
 import butterknife.Optional;
 import empresarial.synapsesdk.com.adapter.MenuAdapter;
 import empresarial.synapsesdk.com.adapter.ProjectAdapter;
+import empresarial.synapsesdk.com.adapter.UserAdapter;
+import empresarial.synapsesdk.com.model.Body;
 import empresarial.synapsesdk.com.model.Project;
 import empresarial.synapsesdk.com.model.User;
+import empresarial.synapsesdk.com.service.GsonRequest;
 import empresarial.synapsesdk.com.service.VolleyApplication;
 import empresarial.synapsesdk.com.util.Utilitario;
 
@@ -64,16 +69,18 @@ public class DescriptionActivity extends Activity implements
     @InjectView(R.id.project_image)
     ImageView project_image;
 
-    public ArrayList<String> lista_compartir;
+    public ArrayList<User> lista_compartir;
     private DrawerLayout mDrawer;
     private ListView mDrawerOptions;
 
     String project_id;
+    String user_name;
     Project project;
     private ActionBarDrawerToggle mDrawerToggle;
 
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
+    private UserAdapter userAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,10 +89,12 @@ public class DescriptionActivity extends Activity implements
         mTitle = mDrawerTitle = getTitle();
         Intent intent = getIntent();
         project_id = intent.getStringExtra("id");
+        user_name = intent.getStringExtra("username");
         setProject(intent.getStringExtra("id"));
         ButterKnife.inject(DescriptionActivity.this);
 
-        lista_compartir = new ArrayList<String>();
+        userAdapter = new UserAdapter(DescriptionActivity.this, android.R.layout.simple_list_item_1);
+        lista_compartir = new ArrayList<User>();
         setupNavDrawer();
     }
 
@@ -139,7 +148,7 @@ public class DescriptionActivity extends Activity implements
                 AutoCompleteTextView search = (AutoCompleteTextView) dialog.findViewById(R.id.search);
                 GridView usuarios = (GridView) dialog.findViewById(R.id.grid_share);
                 getUsuarios(search, usuarios);
-                Log.i("radio", radio_share + "");
+                //Log.i("radio", radio_share + "");
                 String[] lista_autocomplete = new String[lista_compartir.size()];
                 fromArrayListToArray(lista_compartir, lista_autocomplete);
 
@@ -149,20 +158,23 @@ public class DescriptionActivity extends Activity implements
                         (this, android.R.layout.simple_list_item_1, lista_autocomplete);
 
                 for (int i = 0; i < lista_compartir.size(); i++) {
-                    Log.i("Nombre", lista_compartir.get(i));
+                    Log.i("Usuario", lista_compartir.get(i).toString());
                 }
 
 
                 button_enviar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                
 
+                        postShareScreen();
+                        dialog.dismiss();
                     }
                 });
                 button_cancelar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        userAdapter.clear();
+                        userAdapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 });
@@ -183,27 +195,28 @@ public class DescriptionActivity extends Activity implements
 
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 Gson gson = gsonBuilder.create();
+                lista_compartir.clear();
 
-
-                Log.i("JSONObject", response.toString());
+               // Log.i("JSONObject", response.toString());
 
                 try {
-                    Log.i("hayMasItems", response.getString("hayMasItems"));
+                   // Log.i("hayMasItems", response.getString("hayMasItems"));
                     boolean a = response.getString("hayMasItems").equals("false");
-                    Log.i("boolean", a + "");
+                   // Log.i("boolean", a + "");
                     if (!response.getString("hayMasItems").equals("false")) {
 
                     } else {
-                        Log.i("JSONObject2", response.getString("usuarios") + "");
-                        Log.i("JSONObject2[0]", response.getJSONArray("usuarios").get(0) + "");
-                        JSONArray usuarios = response.getJSONArray("usuarios");
+                     //   Log.i("JSONObject2", response.getString("usuarios") + "");
+                     //   Log.i("JSONObject2[0]", response.getJSONArray("usuarios").get(0) + "");
+                        final JSONArray usuarios = response.getJSONArray("usuarios");
 
                         for (int i = 0; i < usuarios.length(); i++) {
                             JSONObject usuarioJson = (JSONObject) usuarios.get(i);
                             User usuario = gson.fromJson(usuarioJson.toString(), User.class);
-                            lista_compartir.add(usuario.getNombre());
+                            lista_compartir.add(usuario);
 
-                            Log.i("id", lista_compartir.get(i) + "");
+
+                           // Log.i("id", lista_compartir.get(i) + "");
                         }
                         //gridView.setAdapter(new ProjectAdapter(ProjectActivity.this,lista_proyectos));
                         search.setAdapter(new ArrayAdapter
@@ -211,15 +224,17 @@ public class DescriptionActivity extends Activity implements
 
                         final ArrayList<String> nombres = new ArrayList<String>();
 
-                        final ArrayAdapter<String> adapter_gridview = new ArrayAdapter<String>(DescriptionActivity.this,
-                                android.R.layout.simple_list_item_1, nombres);
+                      //  final ArrayAdapter<String> adapter_gridview = new ArrayAdapter<String>(DescriptionActivity.this,
+                      //          android.R.layout.simple_list_item_1, nombres);
 
                         search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                Log.i("Adapter", adapterView.getAdapter().getItem(i).toString());
+                               // Log.i("Adapter", adapterView.getAdapter().getItem(i).toString());
                                 nombres.add(adapterView.getAdapter().getItem(i).toString());
-                                usuarios_gridview.setAdapter(adapter_gridview);
+                                //usuarios_gridview.setAdapter(adapter_gridview);
+                                userAdapter.add(((User) adapterView.getAdapter().getItem(i)));
+                                usuarios_gridview.setAdapter(userAdapter);
                                 search.setText("");
                             }
                         });
@@ -228,8 +243,10 @@ public class DescriptionActivity extends Activity implements
                         usuarios_gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                nombres.remove(i);
-                                adapter_gridview.notifyDataSetChanged();
+                                //nombres.remove(i);
+                                userAdapter.remove((User) adapterView.getAdapter().getItem(i));
+                                //adapter_gridview.notifyDataSetChanged();
+                                userAdapter.notifyDataSetChanged();
                             }
                         });
 
@@ -269,14 +286,14 @@ public class DescriptionActivity extends Activity implements
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 Gson gson = gsonBuilder.create();
                 project = gson.fromJson(response.toString(), Project.class);
-                Log.i("project.getNombre(): ", project.getNombre());
+           //     Log.i("project.getNombre(): ", project.getNombre());
                 servicios_description.setText(project.getDescripcionServicios());
                 acabados_description.setText(project.getDescripcionAcabados());
                 infraestructura_description.setText(project.getDescripcionPabellones());
                 project_title_description.setText(project.getNombre());
                 project_resume_description.setText(project.getDescripcion());
                 Picasso.with(DescriptionActivity.this).load(project.getImagenComplejoURL()).into(project_image);
-                Log.i("indicadores", project.getIndicadores() + "");
+          //      Log.i("indicadores", project.getIndicadores() + "");
 
             }
         },
@@ -296,7 +313,7 @@ public class DescriptionActivity extends Activity implements
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Log.i("AVANCE", Utilitario.AVANCE+"");
+      //  Log.i("AVANCE", Utilitario.AVANCE+"");
         Intent intent;
         switch (i) {
             case Utilitario.HOME:
@@ -345,10 +362,42 @@ public class DescriptionActivity extends Activity implements
         mDrawerLayout.closeDrawer(mDrawerList);
     } */
 
-    void fromArrayListToArray(ArrayList<String> arrayList, String[] array) {
+    void fromArrayListToArray(ArrayList<User> arrayList, String[] array) {
         for (int i = 0; i < arrayList.size(); i++) {
-            array[i] = arrayList.get(i);
+            array[i] = arrayList.get(i).toString();
         }
     }
 
+    void postShareScreen()
+    {
+        String url = String.format("http://upcsistemas.com/ensint/api/notificacion");
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson gson = gsonBuilder.create();
+
+
+        ArrayList<String> usuarios_lista = new ArrayList<String>();
+
+        for(int i = 0; i < userAdapter.getCount();i++)
+        {
+            usuarios_lista.add(userAdapter.getItem(i).getUsername());
+        }
+
+        Body body = new Body(null, usuarios_lista, "Detalle", "api/proyectos/"+project_id,"",user_name);
+        //String body = String.format("{\"gcmCode\":\"%s\"}", regid);
+
+        GsonRequest request = new GsonRequest(Request.Method.POST,url,gson.toJson(body),Boolean.class,null,new Response.Listener() {
+            @Override
+            public void onResponse(Object response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        VolleyApplication.getInstance().getRequestQueue().add(request);
+
+    }
 }
