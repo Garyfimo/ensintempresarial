@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="navdrawer_icon_tint_selected">#427A79</color>
+    <color name="navdrawer_icon_tint">#333333</color>
+
     <color name="titles_state">#77cc55</color>
     <color name="titles_project">#54b7b8</color>
     <color name="white">#FFFFFF</color>
     <color name="silver">#ecf0f1</color>
     <color name="bar_menu">#427A79</color>
+
+    <color name="nav_drawer_bg">#FFFFFF</color>
+
+    <color name="table_row_1">#D9D9DC</color>
+    <color name="table_row_2">#F2F2F2</color>
+    <color name="table_header">#427A79</color>
 </resources>

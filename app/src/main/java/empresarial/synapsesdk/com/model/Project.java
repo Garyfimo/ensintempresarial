@@ -16,12 +16,12 @@ public class Project {
     private String fechaInicio;
     private String fechaFin;
     private String presupuestoTotal;
-    private String[] indicadores;
+    private Indicator[] indicadores;
 
     public Project() {
     }
 
-    public Project(int idProyecto, String nombre, String descripcion, String descripcionPabellones, String descripcionAcabados, String descripcionServicios, String imagenComplejoURL, String imagenGoogleMaps, String fechaInicio, String fechaFin, String presupuestoTotal, String[] indicadores) {
+    public Project(int idProyecto, String nombre, String descripcion, String descripcionPabellones, String descripcionAcabados, String descripcionServicios, String imagenComplejoURL, String imagenGoogleMaps, String fechaInicio, String fechaFin, String presupuestoTotal, Indicator[] indicadores) {
         this.idProyecto = idProyecto;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -125,11 +125,11 @@ public class Project {
         this.presupuestoTotal = presupuestoTotal;
     }
 
-    public String[] getIndicadores() {
+    public Indicator[] getIndicadores() {
         return indicadores;
     }
 
-    public void setIndicadores(String[] indicadores) {
+    public void setIndicadores(Indicator[] indicadores) {
         this.indicadores = indicadores;
     }
 }

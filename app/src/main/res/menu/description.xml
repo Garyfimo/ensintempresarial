@@ -2,12 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="empresarial.synapsesdk.com.activity.DescriptionActivity" >
 
-        <item
-            android:id="@+id/button_share"
-            android:title="Compartir"
-            android:showAsAction="ifRoom"
-            android:icon="@android:drawable/ic_menu_share"
-        />
+
 
 </menu>
 

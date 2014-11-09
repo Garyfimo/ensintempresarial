@@ -1,0 +1,31 @@
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/navdrawer"
+    tools:context="empresarial.synapsesdk.com.activity.DescriptionActivity">
+
+    <RelativeLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin">
+
+        <GridView
+            android:id="@+id/grid"
+            android:stretchMode="columnWidth"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:horizontalSpacing="@dimen/mini"
+            android:verticalSpacing="@dimen/mini"
+            android:columnWidth="@dimen/gallery_item_width"
+            android:numColumns="auto_fit"/>
+
+    </RelativeLayout>
+
+    <include layout="@layout/navdrawer_for_ab_overlay" />
+
+</android.support.v4.widget.DrawerLayout>

@@ -41,8 +41,8 @@
         <activity
             android:name=".DescriptionActivity"
             android:label="@string/title_activity_description"
-            android:windowSoftInputMode="adjustResize|stateHidden"
-            android:screenOrientation="landscape" >
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
 
         <receiver
@@ -61,6 +61,10 @@
             android:name=".ProgressActivity"
             android:label="@string/title_activity_progress"
             android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".GalleryActivity"
+            android:label="@string/title_activity_gallery" >
         </activity>
     </application>
 

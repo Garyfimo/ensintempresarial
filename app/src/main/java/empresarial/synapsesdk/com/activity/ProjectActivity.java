@@ -36,6 +36,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import empresarial.synapsesdk.com.Config;
 import empresarial.synapsesdk.com.adapter.ProjectAdapter;
 import empresarial.synapsesdk.com.model.Project;
 import empresarial.synapsesdk.com.service.GsonRequest;
@@ -232,7 +233,7 @@ public class ProjectActivity extends Activity {
     private void sendRegistrationIdToBackend() {
 
 //        Log.i("username",":" + username);
-        String url = String.format("http://upcsistemas.com/ensint/api/auth/gcm?username=%s",username);
+        String url = String.format(Config.BASE_URL + "auth/gcm?username=%s",username);
   //      Log.i("regid",regid);
         String body = String.format("{\"gcmCode\":\"%s\"}", regid);
         GsonRequest request = new GsonRequest(Request.Method.POST,url, body,Boolean.class,null,new Response.Listener() {
@@ -252,7 +253,7 @@ public class ProjectActivity extends Activity {
     }
 
      void setData(){
-        String url = "http://upcsistemas.com/ensint/api/proyectos";
+        String url = Config.BASE_URL + "proyectos";
         JsonObjectRequest request = new JsonObjectRequest(url, null,new Response.Listener<JSONObject>() {
 
             @Override

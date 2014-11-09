@@ -2,9 +2,6 @@ package empresarial.synapsesdk.com.model;
 
 import java.util.ArrayList;
 
-/**
- * Created by Garyfimo on 11/6/14.
- */
 public class Body {
 
     private ArrayList<String> tvs;
@@ -13,14 +10,16 @@ public class Body {
     private String url;
     private String mensaje;
     private String usuario;
+    private String idProyecto;
 
-    public Body(ArrayList<String> tvs, ArrayList<String> usuarios, String pantalla, String url, String mensaje, String usuario) {
+    public Body(ArrayList<String> tvs, ArrayList<String> usuarios, String pantalla, String url, String mensaje, String usuario, String idProyecto) {
         this.tvs = tvs;
         this.usuarios = usuarios;
         this.pantalla = pantalla;
         this.url = url;
         this.mensaje = mensaje;
         this.usuario = usuario;
+        this.idProyecto = idProyecto;
     }
 
     public ArrayList<String> getTvs() {
@@ -69,5 +68,13 @@ public class Body {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+
+    public String getIdProyecto() {
+        return idProyecto;
+    }
+
+    public void setIdProyecto(String idProyecto) {
+        this.idProyecto = idProyecto;
     }
 }
