@@ -16,6 +16,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import empresarial.synapsesdk.com.Config;
 import empresarial.synapsesdk.com.activity.DescriptionActivity;
 import empresarial.synapsesdk.com.activity.GalleryActivity;
+import empresarial.synapsesdk.com.activity.PlanActivity;
 import empresarial.synapsesdk.com.activity.ProgressActivity;
 import empresarial.synapsesdk.com.activity.ProjectActivity;
 import empresarial.synapsesdk.com.activity.R;
@@ -111,7 +112,7 @@ public class GCMIntentService extends IntentService {
                 intent.setClass(this, GalleryActivity.class);
                 break;
             case PLAN:
-                intent.setClass(this, ProjectActivity.class);
+                intent.setClass(this, PlanActivity.class);
                 break;
             case RECURSOS:
                 intent.setClass(this, ProjectActivity.class);

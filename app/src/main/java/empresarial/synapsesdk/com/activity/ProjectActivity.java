@@ -263,25 +263,16 @@ public class ProjectActivity extends Activity {
                 Gson gson = gsonBuilder.create();
 
 
-                //    Log.i("JSONObject",response.toString());
-
                 try {
-                //    Log.i("hayMasItems",response.getString("hayMasItems"));
-                    boolean a = response.getString("hayMasItems").equals("false");
-                //    Log.i("boolean", a+"");
                     if(!response.getString("hayMasItems").equals("false")){
 
                     }else{
-                //    Log.i("JSONObject2",response.getString("proyectos") + "");
-                //    Log.i("JSONObject2[0]",response.getJSONArray("proyectos").get(0)  + "");
                     JSONArray proyectos = response.getJSONArray("proyectos");
                     for(int i = 0; i < proyectos.length(); i++)
                         {
                             JSONObject proyectoJson = (JSONObject) proyectos.get(i);
                             Project proyecto = gson.fromJson(proyectoJson.toString(),Project.class);
                             lista_proyectos.add(proyecto);
-                           // Log.i("imagenGoogleMaps",proyectoJson.getString("imagenGoogleMaps"));
-                //            Log.i("id", lista_proyectos.get(i).getIdProyecto() + "");
                         }
                     gridView.setAdapter(new ProjectAdapter(ProjectActivity.this,lista_proyectos));
 
@@ -295,15 +286,13 @@ public class ProjectActivity extends Activity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.i("ERROR: ", error.toString());
-                    }
+                     }
                 }
         );
 
 
         VolleyApplication.getInstance().getRequestQueue().add(request);
 
-        //Log.i("id", lista_proyectos.get(0).getIdProyecto() + "");
 
     }
 

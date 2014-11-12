@@ -56,6 +56,7 @@ public abstract class BaseActivity extends Activity {
     private ViewGroup mDrawerItemsListContainer;
     private View mNavDrawerItemViews[];
     private Handler mHandler;
+    String user_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public abstract class BaseActivity extends Activity {
         userAdapter = new UserAdapter(this, android.R.layout.simple_list_item_1);
         lista_compartir = new ArrayList<User>();
         project_id = getIntent().getStringExtra("id");
+        user_name = AccountUtils.getAccountName(this);
         mNavDrawerItems = new ArrayList<Integer>();
         mHandler = new Handler();
     }
@@ -285,6 +287,9 @@ public abstract class BaseActivity extends Activity {
                 finish();
                 break;
             case Utilitario.PLAN:
+                intent.setClass(BaseActivity.this, PlanActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case Utilitario.RECURSOS:
                 break;

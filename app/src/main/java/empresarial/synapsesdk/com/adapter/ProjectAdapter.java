@@ -37,7 +37,6 @@ public class ProjectAdapter extends BaseAdapter {
         mContext = context;
         this.projects = projects;
 
-        //Log.i("Estoy en ", "ProjectAdaparte");
     }
 
 
@@ -72,18 +71,8 @@ public class ProjectAdapter extends BaseAdapter {
 
 
         Picasso.with(mContext).load(projects.get(position).getImagenComplejoURL()).into(holder.project_image);
-
-        //holder.project_image.setImageDrawable(getImageFromURL(projects.get(position).getImagenComplejoURL()));
         holder.project_title.setText(projects.get(position).getNombre());
-       // holder.project_subtitle.setText(projects.get(position).getDescripcion());
         holder.project_resume.setText(projects.get(position).getDescripcion());
-        Log.i("getDescription", projects.get(position).getDescripcion());
-
-        //String fontPath = "fonts/Bebas Neue Bold.ttf";
-        //Typeface tf = Typeface.createFromAsset(mContext.getAssets(), fontPath);
-
-        //holder.project_title.setTypeface(tf);
-
         return view;
     }
 

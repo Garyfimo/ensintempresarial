@@ -6,7 +6,8 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_project">Proyectos</string>
     <string name="title_activity_description">Descripcion</string>
-    <string name="title_activity_progress">ProgressActivity</string>
+    <string name="title_activity_progress">Avance</string>
     <string name="title_activity_gallery">Galería</string>
+    <string name="title_activity_plan">Plan de Proyecto</string>
 
 </resources>

@@ -83,7 +83,7 @@ public class DescriptionActivity extends BaseActivity {
     void setProject(String id) {
         String url = String.format(Config.BASE_URL + "proyectos/%s",
                 id);
-        Log.i("id from context", id);
+       // Log.i("id from context", id);
         JsonObjectRequest request = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
 
             @Override
