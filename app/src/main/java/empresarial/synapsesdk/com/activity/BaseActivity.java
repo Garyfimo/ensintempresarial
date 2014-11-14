@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -37,8 +38,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import empresarial.synapsesdk.com.Config;
+import empresarial.synapsesdk.com.adapter.DispositivoAdapter;
 import empresarial.synapsesdk.com.adapter.UserAdapter;
 import empresarial.synapsesdk.com.model.Body;
+import empresarial.synapsesdk.com.model.Dispositivo;
+import empresarial.synapsesdk.com.model.IMapeable;
 import empresarial.synapsesdk.com.model.User;
 import empresarial.synapsesdk.com.service.GsonRequest;
 import empresarial.synapsesdk.com.service.VolleyApplication;
@@ -48,7 +52,9 @@ import empresarial.synapsesdk.com.util.Utilitario;
 public abstract class BaseActivity extends Activity {
 
     private UserAdapter userAdapter;
-    public ArrayList<User> lista_compartir;
+    private DispositivoAdapter dispositivoAdapter;
+    public ArrayList<User> lista_compartir_usuarios;
+    public ArrayList<Dispositivo> lista_compartir_dispositivos;
     String project_id;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -62,7 +68,9 @@ public abstract class BaseActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         userAdapter = new UserAdapter(this, android.R.layout.simple_list_item_1);
-        lista_compartir = new ArrayList<User>();
+        dispositivoAdapter = new DispositivoAdapter(this,android.R.layout.simple_list_item_1);
+        lista_compartir_usuarios = new ArrayList<User>();
+        lista_compartir_dispositivos= new ArrayList<Dispositivo>();
         project_id = getIntent().getStringExtra("id");
         user_name = AccountUtils.getAccountName(this);
         mNavDrawerItems = new ArrayList<Integer>();
@@ -333,17 +341,37 @@ public abstract class BaseActivity extends Activity {
                 Button button_enviar = (Button) dialog.findViewById(R.id.button_enviar);
                 Button button_cancelar = (Button) dialog.findViewById(R.id.button_cancelar);
                 RadioGroup radio_share = (RadioGroup) dialog.findViewById(R.id.radio_share);
-                RadioButton radio_choose = (RadioButton) dialog.findViewById(radio_share.getCheckedRadioButtonId());
-                AutoCompleteTextView search = (AutoCompleteTextView) dialog.findViewById(R.id.search);
-                GridView usuarios = (GridView) dialog.findViewById(R.id.grid_share);
+                final AutoCompleteTextView search = (AutoCompleteTextView) dialog.findViewById(R.id.search);
+                final GridView grid = (GridView) dialog.findViewById(R.id.grid_share);
+                getUsuarios(search, grid);
+                String[] lista_autocomplete = new String[lista_compartir_usuarios.size()];
+                fromArrayListToArrayUser(lista_compartir_usuarios, lista_autocomplete);
 
-                getUsuarios(search, usuarios);
-                //Log.i("radio", radio_share + "");
-                String[] lista_autocomplete = new String[lista_compartir.size()];
-                fromArrayListToArray(lista_compartir, lista_autocomplete);
+                radio_share.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                        RadioButton radio_button = (RadioButton) radioGroup.findViewById(radioGroup.getCheckedRadioButtonId());
+                        if("Usuario".equals(radio_button.getText()+"")){
+                            lista_compartir_dispositivos.clear();
+                            dispositivoAdapter.clear();
+                            search.setText("");
+                            Log.i("USUARIO",radio_button.getText()+"");
+                            getUsuarios(search, grid);
+                            String[] lista_autocomplete = new String[lista_compartir_usuarios.size()];
+                            fromArrayListToArrayUser(lista_compartir_usuarios, lista_autocomplete);
 
-                ArrayAdapter adapter = new ArrayAdapter
-                        (this, android.R.layout.simple_list_item_1, lista_autocomplete);
+                        }
+                        else if("TV".equals(radio_button.getText()+"")){
+                            lista_compartir_usuarios.clear();
+                            userAdapter.clear();
+                            search.setText("");
+                            Log.i("TV",radio_button.getText()+"");
+                            getDispositivos(search,grid);
+                            String[] lista_autocomplete = new String[lista_compartir_dispositivos.size()];
+                            fromArrayListToArrayDispositivo(lista_compartir_dispositivos, lista_autocomplete);
+                        }
+                    }
+                });
 
 
                 button_enviar.setOnClickListener(new View.OnClickListener() {
@@ -370,7 +398,13 @@ public abstract class BaseActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    void fromArrayListToArray(ArrayList<User> arrayList, String[] array) {
+    void fromArrayListToArrayUser(ArrayList<User> arrayList, String[] array) {
+        for (int i = 0; i < arrayList.size(); i++) {
+            array[i] = arrayList.get(i).toString();
+        }
+    }
+
+    void fromArrayListToArrayDispositivo(ArrayList<Dispositivo> arrayList, String[] array) {
         for (int i = 0; i < arrayList.size(); i++) {
             array[i] = arrayList.get(i).toString();
         }
@@ -385,7 +419,7 @@ public abstract class BaseActivity extends Activity {
 
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 Gson gson = gsonBuilder.create();
-                lista_compartir.clear();
+                lista_compartir_usuarios.clear();
 
                 try {
                     boolean a = response.getString("hayMasItems").equals("false");
@@ -397,21 +431,19 @@ public abstract class BaseActivity extends Activity {
                         for (int i = 0; i < usuarios.length(); i++) {
                             JSONObject usuarioJson = (JSONObject) usuarios.get(i);
                             User usuario = gson.fromJson(usuarioJson.toString(), User.class);
-                            lista_compartir.add(usuario);
+                            lista_compartir_usuarios.add(usuario);
                         }
-                        search.setAdapter(new ArrayAdapter<User>(BaseActivity.this, android.R.layout.simple_list_item_1, lista_compartir));
+                        search.setAdapter(new ArrayAdapter<User>(BaseActivity.this, android.R.layout.simple_list_item_1, lista_compartir_usuarios));
 
-                        final ArrayList<String> nombres = new ArrayList<String>();
+                        //final ArrayList<String> nombres = new ArrayList<String>();
 
                         search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                // Log.i("Adapter", adapterView.getAdapter().getItem(i).toString());
-                                nombres.add(adapterView.getAdapter().getItem(i).toString());
-                                //usuarios_gridview.setAdapter(adapter_gridview);
-                                userAdapter.add(((User) adapterView.getAdapter().getItem(i)));
-                                usuarios_gridview.setAdapter(userAdapter);
-                                search.setText("");
+                        // Log.i("Adapter", adapterView.getAdapter().getItem(i).toString());
+                        userAdapter.add(((User) adapterView.getAdapter().getItem(i)));
+                        usuarios_gridview.setAdapter(userAdapter);
+                        search.setText("");
                             }
                         });
 
@@ -419,10 +451,75 @@ public abstract class BaseActivity extends Activity {
                         usuarios_gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                //nombres.remove(i);
-                                userAdapter.remove((User) adapterView.getAdapter().getItem(i));
-                                //adapter_gridview.notifyDataSetChanged();
-                                userAdapter.notifyDataSetChanged();
+                        //nombres.remove(i);
+                        userAdapter.remove((User) adapterView.getAdapter().getItem(i));
+                        userAdapter.notifyDataSetChanged();
+                            }
+                        });
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("ERROR: ", error.toString());
+                    }
+                }
+        );
+        VolleyApplication.getInstance().getRequestQueue().add(request);
+    }
+
+    void getDispositivos(final AutoCompleteTextView search, final GridView dispositivos_gridview)
+    {
+
+        String url = Config.BASE_URL + "dispositivos";
+        JsonObjectRequest request = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                Gson gson = gsonBuilder.create();
+                lista_compartir_usuarios.clear();
+
+                try {
+                    boolean a = response.getString("hayMasItems").equals("false");
+                    if (!response.getString("hayMasItems").equals("false")) {
+
+                    } else {
+                        final JSONArray dispositivos = response.getJSONArray("dispositivos");
+
+                        for (int i = 0; i < dispositivos.length(); i++) {
+                            JSONObject dispositivoJson = (JSONObject) dispositivos.get(i);
+                            Dispositivo dispositivo = gson.fromJson(dispositivoJson.toString(), Dispositivo.class);
+                            lista_compartir_dispositivos.add(dispositivo);
+                        }
+                        search.setAdapter(new ArrayAdapter<Dispositivo>(BaseActivity.this, android.R.layout.simple_list_item_1, lista_compartir_dispositivos));
+
+                        final ArrayList<String> nombres = new ArrayList<String>();
+
+                        search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                Log.i("Adapter", adapterView.getAdapter().getItem(i).toString());
+                                dispositivoAdapter.add(((Dispositivo) adapterView.getAdapter().getItem(i)));
+                                dispositivos_gridview.setAdapter(dispositivoAdapter);
+                                search.setText("");
+                            }
+                        });
+
+
+                        dispositivos_gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        //nombres.remove(i);
+                        dispositivoAdapter.remove((Dispositivo) adapterView.getAdapter().getItem(i));
+                        dispositivoAdapter.notifyDataSetChanged();
                             }
                         });
 

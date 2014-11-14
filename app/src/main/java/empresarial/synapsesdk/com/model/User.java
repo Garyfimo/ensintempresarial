@@ -1,9 +1,11 @@
 package empresarial.synapsesdk.com.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by Garyfimo on 10/16/14.
  */
-public class User {
+public class User implements IMapeable {
     private int idUsuario;
     private String username;
     private String nombre;
@@ -46,4 +48,5 @@ public class User {
     public String toString() {
         return nombre;
     }
+
 }
