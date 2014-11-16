@@ -6,9 +6,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
+import android.text.TextUtils;
 
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -16,6 +15,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import empresarial.synapsesdk.com.Config;
 import empresarial.synapsesdk.com.activity.DescriptionActivity;
 import empresarial.synapsesdk.com.activity.GalleryActivity;
+import empresarial.synapsesdk.com.activity.ImageActivity;
 import empresarial.synapsesdk.com.activity.PlanActivity;
 import empresarial.synapsesdk.com.activity.ProgressActivity;
 import empresarial.synapsesdk.com.activity.ProjectActivity;
@@ -49,18 +49,43 @@ public class GCMIntentService extends IntentService {
             } else if (GoogleCloudMessaging.MESSAGE_TYPE_DELETED.equals(messageType)) {
                 sendNotification("Deleted messages on server: " + extras.toString());
             } else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
-                /*for (int i = 0; i < 5; i++) {
-                    Log.i(TAG, "Working... " + (i + 1)
-                            + "/5 @ " + SystemClock.elapsedRealtime());
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                    }
-                }*/
-                sendNotification(parseBundle(extras));
+                notification(extras);
             }
             GCMBroadcastReceiver.completeWakefulIntent(intent);
         }
+    }
+
+    private void notification(Bundle extras){
+        String ss = extras.getString("screenSharing");
+        if(TextUtils.isEmpty(ss)){
+            sendNotification(parseBundle(extras));
+        }else {
+            sendSSNotification(extras);
+        }
+    }
+
+    private void sendSSNotification(Bundle extras){
+        mNotificationManager = (NotificationManager)
+                this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        String msg = extras.getString("Mensaje");
+
+        Intent intent = new Intent(this, ImageActivity.class);
+        intent.putExtra("url", extras.getString("url"));
+        intent.putExtra("pos", extras.getString("pos"));
+        intent.putExtra("screenSharing", true);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentTitle(Config.APP_NAME)
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText(msg))
+                        .setContentText(msg);
+
+        mBuilder.setContentIntent(contentIntent);
+        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
     }
 
     private NotificationModel parseBundle(Bundle extras) {
@@ -83,7 +108,7 @@ public class GCMIntentService extends IntentService {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.common_signin_btn_icon_dark)
-                        .setContentTitle("GCM Notification")
+                        .setContentTitle(Config.APP_NAME)
                         .setStyle(new NotificationCompat.BigTextStyle()
                                 .bigText(msg))
                         .setContentText(msg);
@@ -117,7 +142,7 @@ public class GCMIntentService extends IntentService {
             case RECURSOS:
                 intent.setClass(this, ProjectActivity.class);
                 break;
-            case AVANCE:
+            case INVERSION:
                 intent.setClass(this, ProgressActivity.class);
                 break;
             case PABELLONES:

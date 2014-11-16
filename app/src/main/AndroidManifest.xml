@@ -65,12 +65,26 @@
         <activity
             android:name=".GalleryActivity"
             android:label="@string/title_activity_gallery"
-            android:screenOrientation="landscape" >>
+            android:screenOrientation="landscape"
+            android:launchMode="singleTask">
+>
         </activity>
         <activity
             android:name=".PlanActivity"
             android:label="@string/title_activity_plan"
-            android:screenOrientation="landscape" >>
+            android:screenOrientation="landscape" >
+>
+        </activity>
+        <activity
+            android:name=".ImageActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_image"
+            android:screenOrientation="landscape"
+            android:parentActivityName=".GalleryActivity"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="empresarial.synapsesdk.com.activity.GalleryActivity" />
         </activity>
     </application>
 

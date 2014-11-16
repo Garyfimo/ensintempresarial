@@ -1,9 +1,11 @@
 package empresarial.synapsesdk.com.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -13,14 +15,11 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.List;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import empresarial.synapsesdk.com.Config;
 import empresarial.synapsesdk.com.adapter.GalleryAdapter;
 import empresarial.synapsesdk.com.model.Galeria;
-import empresarial.synapsesdk.com.model.Project;
 import empresarial.synapsesdk.com.model.Screen;
 import empresarial.synapsesdk.com.service.VolleyApplication;
 import empresarial.synapsesdk.com.util.Utilitario;
@@ -38,13 +37,22 @@ public class GalleryActivity extends BaseActivity {
         ButterKnife.inject(this);
         adapter = new GalleryAdapter(this);
         galleryGrid.setAdapter(adapter);
+        galleryGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Galeria item = (Galeria) adapterView.getItemAtPosition(i);
+                Intent intent = new Intent(GalleryActivity.this, ImageActivity.class);
+                intent.putExtra("id", Integer.toString(item.id));
+                intent.putExtra("url", item.url);
+                startActivity(intent);
+            }
+        });
         getGallery();
 
     }
 
     private void getGallery() {
-        String url = String.format(Config.BASE_URL + "proyectos/%s/galeria",
-                project_id);
+        String url = String.format(Config.BASE_URL + "proyectos/%s/galeria", project_id);
         JsonObjectRequest request = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
 
             @Override

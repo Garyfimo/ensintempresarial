@@ -1,7 +1,9 @@
 package empresarial.synapsesdk.com.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +11,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,6 +58,7 @@ public abstract class BaseActivity extends Activity {
     private DispositivoAdapter dispositivoAdapter;
     public ArrayList<User> lista_compartir_usuarios;
     public ArrayList<Dispositivo> lista_compartir_dispositivos;
+    public boolean shareWithUsers = true;
     String project_id;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -68,9 +72,9 @@ public abstract class BaseActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         userAdapter = new UserAdapter(this, android.R.layout.simple_list_item_1);
-        dispositivoAdapter = new DispositivoAdapter(this,android.R.layout.simple_list_item_1);
+        dispositivoAdapter = new DispositivoAdapter(this, android.R.layout.simple_list_item_1);
         lista_compartir_usuarios = new ArrayList<User>();
-        lista_compartir_dispositivos= new ArrayList<Dispositivo>();
+        lista_compartir_dispositivos = new ArrayList<Dispositivo>();
         project_id = getIntent().getStringExtra("id");
         user_name = AccountUtils.getAccountName(this);
         mNavDrawerItems = new ArrayList<Integer>();
@@ -158,12 +162,12 @@ public abstract class BaseActivity extends Activity {
     }
 
     private String[] NAVDRAWER_TITLE_RES_ID = {
-            "Inicio", "Ver detalle", "Ubicacion", "Galeria", "Plan de proyecto" , "Recursos", "Avance", "Pabellones"
+            "Inicio", "Ver detalle", "Ubicacion", "Galeria", "Plan de proyecto", "Recursos", "Avance", "Pabellones"
     };
     // references to our images
     private Integer[] NAVDRAWER_ICON_RES_ID = {
             R.drawable.icon_home, R.drawable.icon_ver,
-            R.drawable.icon_ubicacion,R.drawable.icon_galeria,
+            R.drawable.icon_ubicacion, R.drawable.icon_galeria,
             R.drawable.icon_grafica_barras, R.drawable.icon_recursos,
             R.drawable.icon_grafica_pastel, R.drawable.icon_edificio
     };
@@ -327,19 +331,39 @@ public abstract class BaseActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
 
-        if(mDrawerToggle.onOptionsItemSelected(item)){
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
 
         int id = item.getItemId();
         switch (id) {
             case R.id.button_share:
-                final Dialog dialog = new Dialog(BaseActivity.this);
-                dialog.setContentView(R.layout.share_layout);
-                dialog.setTitle("Compartir con...");
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                View dialog = LayoutInflater.from(this).inflate(R.layout.share_layout, null);
+                builder.setTitle("Compartir con...");
+                builder.setView(dialog);
+                builder.setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        postShareScreen();
+                    }
+                });
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        userAdapter.clear();
+                        userAdapter.notifyDataSetChanged();
+                    }
+                });
 
-                Button button_enviar = (Button) dialog.findViewById(R.id.button_enviar);
-                Button button_cancelar = (Button) dialog.findViewById(R.id.button_cancelar);
+
+                // old
+                //final Dialog dialog = new Dialog(BaseActivity.this);
+                //dialog.setContentView(R.layout.share_layout);
+                //dialog.setTitle("Compartir con...");
+
+                //Button button_enviar = (Button) dialog.findViewById(R.id.button_enviar);
+                //Button button_cancelar = (Button) dialog.findViewById(R.id.button_cancelar);
                 RadioGroup radio_share = (RadioGroup) dialog.findViewById(R.id.radio_share);
                 final AutoCompleteTextView search = (AutoCompleteTextView) dialog.findViewById(R.id.search);
                 final GridView grid = (GridView) dialog.findViewById(R.id.grid_share);
@@ -351,30 +375,32 @@ public abstract class BaseActivity extends Activity {
                     @Override
                     public void onCheckedChanged(RadioGroup radioGroup, int i) {
                         RadioButton radio_button = (RadioButton) radioGroup.findViewById(radioGroup.getCheckedRadioButtonId());
-                        if("Usuario".equals(radio_button.getText()+"")){
+                        if ("Usuario".equals(radio_button.getText() + "")) {
+                            shareWithUsers = true;
                             lista_compartir_dispositivos.clear();
                             dispositivoAdapter.clear();
                             search.setText("");
-                            Log.i("USUARIO",radio_button.getText()+"");
+                            Log.i("USUARIO", radio_button.getText() + "");
                             getUsuarios(search, grid);
                             String[] lista_autocomplete = new String[lista_compartir_usuarios.size()];
                             fromArrayListToArrayUser(lista_compartir_usuarios, lista_autocomplete);
 
-                        }
-                        else if("TV".equals(radio_button.getText()+"")){
+                        } else if ("TV".equals(radio_button.getText() + "")) {
+                            shareWithUsers = false;
                             lista_compartir_usuarios.clear();
                             userAdapter.clear();
                             search.setText("");
-                            Log.i("TV",radio_button.getText()+"");
-                            getDispositivos(search,grid);
+                            Log.i("TV", radio_button.getText() + "");
+                            getDispositivos(search, grid);
                             String[] lista_autocomplete = new String[lista_compartir_dispositivos.size()];
                             fromArrayListToArrayDispositivo(lista_compartir_dispositivos, lista_autocomplete);
                         }
                     }
                 });
 
+                builder.show();
 
-                button_enviar.setOnClickListener(new View.OnClickListener() {
+                /*button_enviar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
@@ -390,7 +416,8 @@ public abstract class BaseActivity extends Activity {
                         dialog.dismiss();
                     }
                 });
-                dialog.show();
+                */
+                //dialog.show();
                 return true;
 
         }
@@ -440,10 +467,10 @@ public abstract class BaseActivity extends Activity {
                         search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        // Log.i("Adapter", adapterView.getAdapter().getItem(i).toString());
-                        userAdapter.add(((User) adapterView.getAdapter().getItem(i)));
-                        usuarios_gridview.setAdapter(userAdapter);
-                        search.setText("");
+                                // Log.i("Adapter", adapterView.getAdapter().getItem(i).toString());
+                                userAdapter.add(((User) adapterView.getAdapter().getItem(i)));
+                                usuarios_gridview.setAdapter(userAdapter);
+                                search.setText("");
                             }
                         });
 
@@ -451,9 +478,9 @@ public abstract class BaseActivity extends Activity {
                         usuarios_gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        //nombres.remove(i);
-                        userAdapter.remove((User) adapterView.getAdapter().getItem(i));
-                        userAdapter.notifyDataSetChanged();
+                                //nombres.remove(i);
+                                userAdapter.remove((User) adapterView.getAdapter().getItem(i));
+                                userAdapter.notifyDataSetChanged();
                             }
                         });
 
@@ -474,8 +501,7 @@ public abstract class BaseActivity extends Activity {
         VolleyApplication.getInstance().getRequestQueue().add(request);
     }
 
-    void getDispositivos(final AutoCompleteTextView search, final GridView dispositivos_gridview)
-    {
+    void getDispositivos(final AutoCompleteTextView search, final GridView dispositivos_gridview) {
 
         String url = Config.BASE_URL + "dispositivos";
         JsonObjectRequest request = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
@@ -517,9 +543,9 @@ public abstract class BaseActivity extends Activity {
                         dispositivos_gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        //nombres.remove(i);
-                        dispositivoAdapter.remove((Dispositivo) adapterView.getAdapter().getItem(i));
-                        dispositivoAdapter.notifyDataSetChanged();
+                                //nombres.remove(i);
+                                dispositivoAdapter.remove((Dispositivo) adapterView.getAdapter().getItem(i));
+                                dispositivoAdapter.notifyDataSetChanged();
                             }
                         });
 
@@ -548,16 +574,21 @@ public abstract class BaseActivity extends Activity {
         String url = String.format(Config.BASE_URL + "notificacion");
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson gson = gsonBuilder.create();
-
-
         ArrayList<String> usuarios_lista = new ArrayList<String>();
+        ArrayList<String> dispositivos_lista = new ArrayList<String>();
 
-        for (int i = 0; i < userAdapter.getCount(); i++) {
-            usuarios_lista.add(userAdapter.getItem(i).getUsername());
+        if(shareWithUsers) {
+            for (int i = 0; i < userAdapter.getCount(); i++) {
+                usuarios_lista.add(userAdapter.getItem(i).getUsername());
+            }
+        } else {
+            for (int i = 0; i < dispositivoAdapter.getCount(); i++) {
+                dispositivos_lista.add(dispositivoAdapter.getItem(i).getIp());
+            }
         }
 
         String user_name = AccountUtils.getAccountName(this);
-        Body body = new Body(null, usuarios_lista, getScreenName(), getScreenUrl(), "", user_name, project_id);
+        Body body = new Body(dispositivos_lista, usuarios_lista, getScreenName(), getScreenUrl(), "", user_name, project_id);
         //String body = String.format("{\"gcmCode\":\"%s\"}", regid);
 
         GsonRequest request = new GsonRequest(Request.Method.POST, url, gson.toJson(body), Boolean.class, null, new Response.Listener() {
