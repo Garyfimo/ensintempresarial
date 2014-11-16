@@ -94,14 +94,14 @@ public class RecursosActivity extends BaseActivity {
                 try {
                     JSONArray recursos = response.getJSONArray("recursos");
 
-                    for(int i = 0; i < response.length(); i++) {
+                    for(int i = 0; i < recursos.length(); i++) {
                         JSONObject recursoJson = (JSONObject) recursos.get(i);
                         Recurso recurso = gson.fromJson(recursoJson.toString(),Recurso.class);
                         Log.i("cantidad: ",recurso.getCantidad());
                         Log.i("titulo: ",recurso.getDescripcion());
                         lista_recurso.add(recurso);
                     }
-                    recursos_gridview.setAdapter(new RecursoAdapter(lista_recurso,RecursosActivity.this));
+                   recursos_gridview.setAdapter(new RecursoAdapter(lista_recurso,RecursosActivity.this));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

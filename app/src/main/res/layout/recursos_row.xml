@@ -30,7 +30,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/recursos_cantidad"
-        android:paddingRight="20dp"
+        android:paddingRight="30dp"
         android:layout_below="@+id/recursos_title"
         android:layout_toRightOf="@+id/textView2"
         android:layout_toEndOf="@+id/textView2" />
