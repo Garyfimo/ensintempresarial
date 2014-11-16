@@ -9,7 +9,13 @@
     <string name="title_activity_progress">Avance</string>
     <string name="title_activity_gallery">Galería</string>
     <string name="title_activity_plan">Plan de Proyecto</string>
+<<<<<<< HEAD
     <string name="title_activity_ubicacion">UbicacionActivity</string>
     <string name="title_activity_recursos">RecursosActivity</string>
+=======
+    <string name="title_activity_image">Imagen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+>>>>>>> 5662d23bfcb66b6a8c6b14f514efdbe30103223e
 
 </resources>

@@ -33,4 +33,9 @@ public class GalleryAdapter extends ArrayAdapter<Galeria> {
                 .into(image);
         return view;
     }
+
+    @Override
+    public long getItemId(int position) {
+        return getItem(position).id;
+    }
 }

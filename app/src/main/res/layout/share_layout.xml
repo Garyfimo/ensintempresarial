@@ -81,6 +81,7 @@
         android:numColumns="4"/>
 
     <Button
+        android:visibility="gone"
         android:id="@+id/button_enviar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -90,6 +91,7 @@
         android:text="Enviar" />
 
     <Button
+        android:visibility="gone"
         android:id="@+id/button_cancelar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -2,6 +2,7 @@
 <resources>
     <color name="navdrawer_icon_tint_selected">#427A79</color>
     <color name="navdrawer_icon_tint">#333333</color>
+    <color name="black_overlay">#66000000</color>
 
     <color name="titles_state">#77cc55</color>
     <color name="titles_project">#54b7b8</color>

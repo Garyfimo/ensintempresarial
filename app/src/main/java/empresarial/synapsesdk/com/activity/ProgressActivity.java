@@ -21,9 +21,7 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import empresarial.synapsesdk.com.Config;
-import empresarial.synapsesdk.com.adapter.PlanAdapter;
 import empresarial.synapsesdk.com.model.Inversion;
-import empresarial.synapsesdk.com.model.Plan;
 import empresarial.synapsesdk.com.model.Screen;
 import empresarial.synapsesdk.com.service.VolleyApplication;
 import empresarial.synapsesdk.com.util.Utilitario;
@@ -164,7 +162,7 @@ public class ProgressActivity extends BaseActivity {
 
     @Override
     public String getScreenName() {
-        return Screen.AVANCE.toString();
+        return Screen.INVERSION.toString();
     }
 
     @Override
