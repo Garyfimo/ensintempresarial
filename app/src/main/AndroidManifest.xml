@@ -65,12 +65,23 @@
         <activity
             android:name=".GalleryActivity"
             android:label="@string/title_activity_gallery"
-            android:screenOrientation="landscape" >>
+            android:screenOrientation="landscape" >
+>
         </activity>
         <activity
             android:name=".PlanActivity"
             android:label="@string/title_activity_plan"
-            android:screenOrientation="landscape" >>
+            android:screenOrientation="landscape" >
+>
+        </activity>
+        <activity
+            android:name=".UbicacionActivity"
+            android:label="@string/title_activity_ubicacion"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".RecursosActivity"
+            android:label="@string/title_activity_recursos" >
         </activity>
     </application>
 

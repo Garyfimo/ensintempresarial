@@ -288,6 +288,9 @@ public abstract class BaseActivity extends Activity {
                 finish();
                 break;
             case Utilitario.UBICACION:
+                intent.setClass(BaseActivity.this, UbicacionActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case Utilitario.GALERIA:
                 intent.setClass(BaseActivity.this, GalleryActivity.class);
@@ -300,6 +303,9 @@ public abstract class BaseActivity extends Activity {
                 finish();
                 break;
             case Utilitario.RECURSOS:
+                intent.setClass(BaseActivity.this, RecursosActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case Utilitario.AVANCE:
                 Intent intentAvance = new Intent(BaseActivity.this, ProgressActivity.class);

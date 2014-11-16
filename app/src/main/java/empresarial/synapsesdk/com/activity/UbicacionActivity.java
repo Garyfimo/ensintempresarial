@@ -1,11 +1,11 @@
 package empresarial.synapsesdk.com.activity;
 
-
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -16,62 +16,58 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import empresarial.synapsesdk.com.Config;
+import empresarial.synapsesdk.com.activity.R;
 import empresarial.synapsesdk.com.model.Project;
 import empresarial.synapsesdk.com.model.Screen;
-import empresarial.synapsesdk.com.model.User;
 import empresarial.synapsesdk.com.service.VolleyApplication;
 import empresarial.synapsesdk.com.util.Utilitario;
 
+public class UbicacionActivity extends BaseActivity {
 
-public class DescriptionActivity extends BaseActivity {
-
-
-    @InjectView(R.id.servicios_description)
-    TextView servicios_description;
-    @InjectView(R.id.acabados_description)
-    TextView acabados_description;
-    @InjectView(R.id.infraestructura_description)
-    TextView infraestructura_description;
-    @InjectView(R.id.project_title_description)
-    TextView project_title_description;
-    @InjectView(R.id.project_resume_description)
-    TextView project_resume_description;
-    @InjectView(R.id.project_image)
-    ImageView project_image;
-
-    public ArrayList<User> lista_compartir;
-
-    String project_id;
-    String user_name;
     Project project;
-
+    @InjectView(R.id.ubicacion_image)
+    ImageView imagen_google_maps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_description);
-        Intent intent = getIntent();
-        project_id = intent.getStringExtra("id");
-        user_name = intent.getStringExtra("username");
-        setProject(intent.getStringExtra("id"));
-        ButterKnife.inject(DescriptionActivity.this);
+        setContentView(R.layout.activity_ubicacion);
 
-        lista_compartir = new ArrayList<User>();
+        ButterKnife.inject(UbicacionActivity.this);
+        setProject(project_id);
     }
 
     @Override
     protected int getSelfNavDrawerItem() {
-        return Utilitario.VER;
+        return Utilitario.UBICACION;
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.ubicacion, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     public String getScreenName() {
-        return Screen.DETALLE.toString();
+        return Screen.UBICACION.toString();
     }
 
     @Override
@@ -79,11 +75,10 @@ public class DescriptionActivity extends BaseActivity {
         return "api/proyectos/"+project_id;
     }
 
-
     void setProject(String id) {
         String url = String.format(Config.BASE_URL + "proyectos/%s",
                 id);
-       // Log.i("id from context", id);
+
         JsonObjectRequest request = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
 
             @Override
@@ -93,14 +88,9 @@ public class DescriptionActivity extends BaseActivity {
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 Gson gson = gsonBuilder.create();
                 project = gson.fromJson(response.toString(), Project.class);
-           //     Log.i("project.getNombre(): ", project.getNombre());
-                servicios_description.setText(project.getDescripcionServicios());
-                acabados_description.setText(project.getDescripcionAcabados());
-                infraestructura_description.setText(project.getDescripcionPabellones());
-                project_title_description.setText(project.getNombre());
-                project_resume_description.setText(project.getDescripcion());
-                Picasso.with(DescriptionActivity.this).load(project.getImagenGoogleMaps()).into(project_image);
-          //      Log.i("indicadores", project.getIndicadores() + "");
+                //     Log.i("project.getNombre(): ", project.getNombre());
+                Picasso.with(UbicacionActivity.this).load(project.getImagenComplejoURL()).into(imagen_google_maps);
+                //      Log.i("indicadores", project.getIndicadores() + "");
 
             }
         },
