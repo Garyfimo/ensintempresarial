@@ -103,7 +103,7 @@ public class ProjectActivity extends Activity {
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Toast.makeText(ProjectActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(ProjectActivity.this, DescriptionActivity.class);
                 intent.putExtra("id",lista_proyectos.get(position).getIdProyecto()+"");
                 intent.putExtra("username",username);

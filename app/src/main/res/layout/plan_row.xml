@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/text_plan_fecha_hasta"
+        android:id="@+id/rendimiento"
         android:paddingTop="@dimen/mini"
         android:paddingLeft="@dimen/normal"
         android:paddingRight="@dimen/normal"

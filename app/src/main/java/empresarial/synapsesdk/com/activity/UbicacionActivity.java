@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -30,6 +31,10 @@ public class UbicacionActivity extends BaseActivity {
     Project project;
     @InjectView(R.id.ubicacion_image)
     ImageView imagen_google_maps;
+    @InjectView(R.id.ubicacion_title)
+    TextView titulo;
+    @InjectView(R.id.ubicacion_descripcion)
+    TextView descripcion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +51,6 @@ public class UbicacionActivity extends BaseActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.ubicacion, menu);
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -89,7 +88,9 @@ public class UbicacionActivity extends BaseActivity {
                 Gson gson = gsonBuilder.create();
                 project = gson.fromJson(response.toString(), Project.class);
                 //     Log.i("project.getNombre(): ", project.getNombre());
-                Picasso.with(UbicacionActivity.this).load(project.getImagenComplejoURL()).into(imagen_google_maps);
+                Picasso.with(UbicacionActivity.this).load(project.getImagenGoogleMaps()).into(imagen_google_maps);
+                titulo.setText(project.getNombre());
+                descripcion.setText(project.getDescripcion());
                 //      Log.i("indicadores", project.getIndicadores() + "");
 
             }

@@ -43,7 +43,12 @@ public class DescriptionActivity extends BaseActivity {
     TextView project_resume_description;
     @InjectView(R.id.project_image)
     ImageView project_image;
-
+    @InjectView(R.id.rendimiento)
+    TextView rendimiento;
+    @InjectView(R.id.infraestructura)
+    TextView infraestructura;
+    @InjectView(R.id.disponibilidad)
+    TextView disponibilidad;
     public ArrayList<User> lista_compartir;
 
     String project_id;
@@ -99,6 +104,9 @@ public class DescriptionActivity extends BaseActivity {
                 infraestructura_description.setText(project.getDescripcionPabellones());
                 project_title_description.setText(project.getNombre());
                 project_resume_description.setText(project.getDescripcion());
+                disponibilidad.setText(project.getIndicadores()[0].getValor());
+                rendimiento.setText(project.getIndicadores()[1].getValor());
+                infraestructura.setText(project.getIndicadores()[2].getValor());
                 Picasso.with(DescriptionActivity.this).load(project.getImagenComplejoURL()).into(project_image);
           //      Log.i("indicadores", project.getIndicadores() + "");
 

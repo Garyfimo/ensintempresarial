@@ -61,7 +61,7 @@
 
 
     <empresarial.synapsesdk.com.widget.TextViewFont
-        android:id="@+id/destinos_label"
+        android:id="@+id/disponibilidad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Destinos:"
@@ -74,9 +74,9 @@
         android:id="@+id/grid_share"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_alignLeft="@+id/destinos_label"
-        android:layout_alignStart="@+id/destinos_label"
-        android:layout_below="@+id/destinos_label"
+        android:layout_alignLeft="@+id/disponibilidad"
+        android:layout_alignStart="@+id/disponibilidad"
+        android:layout_below="@+id/disponibilidad"
         android:layout_marginTop="10dp"
         android:numColumns="4"/>
 

@@ -5,14 +5,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.google.android.gms.internal.id;
 
 import java.util.ArrayList;
 
@@ -76,7 +73,7 @@ public class PlanAdapter extends BaseAdapter {
     static class PlanViewHolder {
     @InjectView(R.id.text_plan_fecha_desde)
     TextView fecha_desde;
-    @InjectView(R.id.text_plan_fecha_hasta)
+    @InjectView(R.id.rendimiento)
     TextView fecha_hasta;
     @InjectView(R.id.progress_bar_plan)
     ProgressBar avance;
