@@ -10,6 +10,11 @@
         android:layout_height="match_parent"
         android:padding="100dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "/>
+
         <TableLayout
             android:id="@+id/Tabla"
             android:layout_width="match_parent"

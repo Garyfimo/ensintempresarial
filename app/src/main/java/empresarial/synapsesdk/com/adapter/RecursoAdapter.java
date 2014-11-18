@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -65,7 +66,12 @@ public class RecursoAdapter extends BaseAdapter {
         Log.i("Adapter-> cantidad -> ", recursos.get(i).getCantidad());
         holder.cantidad.setText(recursos.get(i).getCantidad());
         holder.titulo.setText(recursos.get(i).getDescripcion());
-
+        for(int j = 0; j < recursos.get(i).getNumImagenes();j++)
+        {
+            ImageView image = new ImageView(context);
+            Picasso.with(context).load(recursos.get(i).getUrlImagen()).into(image);
+            holder.linear.addView(image);
+        }
         return view;
     }
 
@@ -74,6 +80,8 @@ public class RecursoAdapter extends BaseAdapter {
         TextView cantidad;
         @InjectView(R.id.recursos_title)
         TextView titulo;
+        @InjectView(R.id.linear_layout_recursos_row)
+        LinearLayout linear;
 
         public RecursoViewHolder(View view)
         {
