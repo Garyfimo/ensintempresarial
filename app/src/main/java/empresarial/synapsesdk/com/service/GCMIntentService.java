@@ -20,6 +20,7 @@ import empresarial.synapsesdk.com.activity.PlanActivity;
 import empresarial.synapsesdk.com.activity.ProgressActivity;
 import empresarial.synapsesdk.com.activity.ProjectActivity;
 import empresarial.synapsesdk.com.activity.R;
+import empresarial.synapsesdk.com.activity.RecursosActivity;
 import empresarial.synapsesdk.com.model.NotificationModel;
 import empresarial.synapsesdk.com.model.Screen;
 
@@ -140,7 +141,7 @@ public class GCMIntentService extends IntentService {
                 intent.setClass(this, PlanActivity.class);
                 break;
             case RECURSOS:
-                intent.setClass(this, ProjectActivity.class);
+                intent.setClass(this, RecursosActivity.class);
                 break;
             case INVERSION:
                 intent.setClass(this, ProgressActivity.class);

@@ -99,7 +99,7 @@ public class DescriptionActivity extends BaseActivity {
                 infraestructura_description.setText(project.getDescripcionPabellones());
                 project_title_description.setText(project.getNombre());
                 project_resume_description.setText(project.getDescripcion());
-                Picasso.with(DescriptionActivity.this).load(project.getImagenGoogleMaps()).into(project_image);
+                Picasso.with(DescriptionActivity.this).load(project.getImagenComplejoURL()).into(project_image);
           //      Log.i("indicadores", project.getIndicadores() + "");
 
             }

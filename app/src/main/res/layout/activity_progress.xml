@@ -8,11 +8,25 @@
         android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="100dp">
+        android:paddingTop="50dp"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:paddingBottom="100dp">
 
-        <TextView
+        <empresarial.synapsesdk.com.widget.TextViewFont
+            android:id="@+id/title"
+            android:textColor="@color/bar_menu"
+            android:textAppearance="?android:textAppearanceLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Lorem Ipsum"
+            android:layout_marginBottom="@dimen/normal"/>
+
+        <TextView
+            android:layout_below="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceMedium"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "/>
 
         <TableLayout
