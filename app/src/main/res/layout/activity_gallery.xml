@@ -9,20 +9,19 @@
         android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/normal"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin">
+        android:layout_marginRight="@dimen/normal">
 
         <GridView
             android:id="@+id/grid"
             android:stretchMode="columnWidth"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:horizontalSpacing="@dimen/mini"
-            android:verticalSpacing="@dimen/mini"
-            android:columnWidth="@dimen/gallery_item_width"
-            android:numColumns="auto_fit"/>
+            android:horizontalSpacing="@dimen/small"
+            android:verticalSpacing="@dimen/small"
+            android:numColumns="3"/>
 
     </RelativeLayout>
 
