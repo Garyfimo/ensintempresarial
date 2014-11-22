@@ -60,8 +60,6 @@ public class ImageActivity extends ScreenSharingActivity {
         url = getIntent().getStringExtra("url");
 
         setupActionBar();
-
-        final View controlsView = findViewById(R.id.fullscreen_content_controls);
         imageGallery = (ImageView) findViewById(R.id.fullscreen_content);
 
         // Set up an instance of SystemUiHider to control the system UI for
@@ -77,11 +75,12 @@ public class ImageActivity extends ScreenSharingActivity {
                     @Override
                     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
                     public void onVisibilityChange(boolean visible) {
+                        /*
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
                             // If the ViewPropertyAnimator API is available
                             // (Honeycomb MR2 and later), use it to animate the
                             // in-layout UI controls at the bottom of the
-                            // screen.
+                             screen.
                             if (mControlsHeight == 0) {
                                 mControlsHeight = controlsView.getHeight();
                             }
@@ -92,6 +91,7 @@ public class ImageActivity extends ScreenSharingActivity {
                             controlsView.animate()
                                     .translationY(visible ? 0 : mControlsHeight)
                                     .setDuration(mShortAnimTime);
+
                         } else {
                             // If the ViewPropertyAnimator APIs aren't
                             // available, simply show or hide the in-layout UI
@@ -103,6 +103,7 @@ public class ImageActivity extends ScreenSharingActivity {
                             // Schedule a hide().
                             delayedHide(AUTO_HIDE_DELAY_MILLIS);
                         }
+                        */
                     }
                 });
 

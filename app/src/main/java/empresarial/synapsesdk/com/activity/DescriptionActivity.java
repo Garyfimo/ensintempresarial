@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import empresarial.synapsesdk.com.Config;
+import empresarial.synapsesdk.com.model.Indicator;
 import empresarial.synapsesdk.com.model.Project;
 import empresarial.synapsesdk.com.model.Screen;
 import empresarial.synapsesdk.com.model.User;
@@ -46,7 +47,7 @@ public class DescriptionActivity extends BaseActivity {
     @InjectView(R.id.rendimiento)
     TextView rendimiento;
     @InjectView(R.id.infraestructura)
-    TextView infraestructura;
+    TextView calidad;
     @InjectView(R.id.disponibilidad)
     TextView disponibilidad;
     public ArrayList<User> lista_compartir;
@@ -81,34 +82,36 @@ public class DescriptionActivity extends BaseActivity {
 
     @Override
     public String getScreenUrl() {
-        return "api/proyectos/"+project_id;
+        return "api/proyectos/" + project_id;
     }
 
 
     void setProject(String id) {
-        String url = String.format(Config.BASE_URL + "proyectos/%s",
-                id);
-       // Log.i("id from context", id);
+        String url = String.format(Config.BASE_URL + "proyectos/%s", id);
         JsonObjectRequest request = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
-                //      Toast.makeText(LoginActivity.this,response.toString(),Toast.LENGTH_LONG).show();
 
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 Gson gson = gsonBuilder.create();
                 project = gson.fromJson(response.toString(), Project.class);
-           //     Log.i("project.getNombre(): ", project.getNombre());
                 servicios_description.setText(project.getDescripcionServicios());
                 acabados_description.setText(project.getDescripcionAcabados());
                 infraestructura_description.setText(project.getDescripcionPabellones());
                 project_title_description.setText(project.getNombre());
                 project_resume_description.setText(project.getDescripcion());
-                disponibilidad.setText(project.getIndicadores()[0].getValor());
-                rendimiento.setText(project.getIndicadores()[1].getValor());
-                infraestructura.setText(project.getIndicadores()[2].getValor());
+
+                for (Indicator indicator : project.getIndicadores()) {
+                    if (indicator.getNombre().equalsIgnoreCase("Disponibilidad")) {
+                        disponibilidad.setText(indicator.getValor() + "%");
+                    } else if (indicator.getNombre().equalsIgnoreCase("rendimiento")) {
+                        rendimiento.setText(indicator.getValor() + "%");
+                    } else if (indicator.getNombre().equalsIgnoreCase("calidad")) {
+                        calidad.setText(indicator.getValor() + "%");
+                    }
+                }
                 Picasso.with(DescriptionActivity.this).load(project.getImagenComplejoURL()).into(project_image);
-          //      Log.i("indicadores", project.getIndicadores() + "");
 
             }
         },

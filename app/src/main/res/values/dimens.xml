@@ -11,4 +11,6 @@
     <dimen name="xxlarge">64dp</dimen>
     <dimen name="gallery_item_width">320dp</dimen>
     <dimen name="gallery_item_height">280dp</dimen>
+
+    <dimen name="item_list_title">25.0dp</dimen>
 </resources>

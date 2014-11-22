@@ -66,9 +66,12 @@ public class RecursoAdapter extends BaseAdapter {
         Log.i("Adapter-> cantidad -> ", recursos.get(i).getCantidad());
         holder.cantidad.setText(recursos.get(i).getCantidad());
         holder.titulo.setText(recursos.get(i).getDescripcion());
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        lp.setMargins(0, 0 , 10, 0);
         for(int j = 0; j < recursos.get(i).getNumImagenes();j++)
         {
             ImageView image = new ImageView(context);
+            image.setLayoutParams(lp);
             Picasso.with(context).load(recursos.get(i).getUrlImagen()).into(image);
             holder.linear.addView(image);
         }

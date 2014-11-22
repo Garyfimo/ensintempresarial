@@ -157,7 +157,7 @@ public class ProgressActivity extends BaseActivity {
 
     @Override
     protected int getSelfNavDrawerItem() {
-        return Utilitario.AVANCE;
+        return Utilitario.INVERSION;
     }
 
     @Override

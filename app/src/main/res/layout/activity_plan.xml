@@ -13,9 +13,13 @@
          <GridView
              android:id="@+id/grid_plan"
              android:numColumns="2"
+             android:clipToPadding="false"
              android:layout_marginLeft="40dp"
-             android:horizontalSpacing="10dp"
-             android:layout_marginTop="25dp"
+             android:layout_marginRight="40dp"
+             android:horizontalSpacing="@dimen/normal"
+             android:verticalSpacing="@dimen/normal"
+             android:paddingTop="25dp"
+             android:paddingBottom="25dp"
              android:gravity="center"
              android:columnWidth="100dp"
 

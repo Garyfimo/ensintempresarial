@@ -39,11 +39,12 @@ import butterknife.InjectView;
 import empresarial.synapsesdk.com.Config;
 import empresarial.synapsesdk.com.adapter.ProjectAdapter;
 import empresarial.synapsesdk.com.model.Project;
+import empresarial.synapsesdk.com.model.Screen;
 import empresarial.synapsesdk.com.service.GsonRequest;
 import empresarial.synapsesdk.com.service.VolleyApplication;
 import empresarial.synapsesdk.com.util.AccountUtils;
 
-public class ProjectActivity extends Activity {
+public class ProjectActivity extends BaseActivity {
 
     public static final String PROPERTY_REG_ID = "linear-time-712";
     private static final String PROPERTY_APP_VERSION = "appVersion";
@@ -108,9 +109,25 @@ public class ProjectActivity extends Activity {
                 intent.putExtra("id",lista_proyectos.get(position).getIdProyecto()+"");
                 intent.putExtra("username",username);
                 startActivity(intent);
+                finish();
             }
         });
 
+    }
+
+    @Override
+    protected int getSelfNavDrawerItem() {
+        return -1;
+    }
+
+    @Override
+    public String getScreenName() {
+        return Screen.PROYECTOS.toString();
+    }
+
+    @Override
+    public String getScreenUrl() {
+        return "api/proyectos";
     }
 
 
@@ -118,25 +135,6 @@ public class ProjectActivity extends Activity {
     public void onResume() {
         super.onResume();
         checkPlayServices();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.project, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private boolean checkPlayServices() {

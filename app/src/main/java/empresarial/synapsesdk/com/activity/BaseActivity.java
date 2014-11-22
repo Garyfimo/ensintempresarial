@@ -2,7 +2,6 @@ package empresarial.synapsesdk.com.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,8 +18,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -45,7 +42,6 @@ import empresarial.synapsesdk.com.adapter.DispositivoAdapter;
 import empresarial.synapsesdk.com.adapter.UserAdapter;
 import empresarial.synapsesdk.com.model.Body;
 import empresarial.synapsesdk.com.model.Dispositivo;
-import empresarial.synapsesdk.com.model.IMapeable;
 import empresarial.synapsesdk.com.model.User;
 import empresarial.synapsesdk.com.service.GsonRequest;
 import empresarial.synapsesdk.com.service.VolleyApplication;
@@ -142,8 +138,8 @@ public abstract class BaseActivity extends Activity {
         mNavDrawerItems.add(Utilitario.GALERIA);
         mNavDrawerItems.add(Utilitario.PLAN);
         mNavDrawerItems.add(Utilitario.RECURSOS);
-        mNavDrawerItems.add(Utilitario.AVANCE);
-        mNavDrawerItems.add(Utilitario.PABELLONES);
+        mNavDrawerItems.add(Utilitario.INVERSION);
+        //mNavDrawerItems.add(Utilitario.PABELLONES);
         createNavDrawerItems();
     }
 
@@ -162,7 +158,7 @@ public abstract class BaseActivity extends Activity {
     }
 
     private String[] NAVDRAWER_TITLE_RES_ID = {
-            "Inicio", "Ver detalle", "Ubicacion", "Galeria", "Plan de proyecto", "Recursos", "Avance", "Pabellones"
+            "Inicio", "Ver detalle", "Ubicacion", "Galeria", "Plan de proyecto", "Recursos", "Inversión", "Pabellones"
     };
     // references to our images
     private Integer[] NAVDRAWER_ICON_RES_ID = {
@@ -311,7 +307,7 @@ public abstract class BaseActivity extends Activity {
                 startActivity(intent);
                 finish();
                 break;
-            case Utilitario.AVANCE:
+            case Utilitario.INVERSION:
                 Intent intentAvance = new Intent(BaseActivity.this, ProgressActivity.class);
                 intentAvance.putExtra("id", project_id);
                 startActivity(intentAvance);
@@ -337,7 +333,7 @@ public abstract class BaseActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
 
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
+        if (mDrawerToggle != null && mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
 

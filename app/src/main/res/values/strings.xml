@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">EnsIntEmpresarial</string>
+    <string name="app_name">SGPI</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_project">Proyectos</string>
+    <string name="title_activity_project">Sistema de Gestión de Proyectos Inmobiliarios</string>
     <string name="title_activity_description">Descripcion</string>
     <string name="title_activity_progress">Avance</string>
     <string name="title_activity_gallery">Galería</string>
@@ -14,4 +14,7 @@
     <string name="title_activity_image">Imagen</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="inversion_title">Inversión</string>
+    <string name="inversion_desc">En esta pantalla se podrá analizar todas las inversiones realizadas en el proyecto. Asimismo, la cantidad ya utilizada del monto total destinado.</string>
 </resources>

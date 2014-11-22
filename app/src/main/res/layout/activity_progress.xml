@@ -8,26 +8,26 @@
         android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="50dp"
+        android:paddingBottom="100dp"
         android:paddingLeft="100dp"
         android:paddingRight="100dp"
-        android:paddingBottom="100dp">
+        android:paddingTop="50dp">
 
         <empresarial.synapsesdk.com.widget.TextViewFont
             android:id="@+id/title"
-            android:textColor="@color/bar_menu"
-            android:textAppearance="?android:textAppearanceLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lorem Ipsum"
-            android:layout_marginBottom="@dimen/normal"/>
+            android:layout_marginBottom="@dimen/normal"
+            android:text="@string/inversion_title"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/bar_menu" />
 
         <TextView
-            android:layout_below="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:textAppearanceMedium"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "/>
+            android:layout_below="@+id/title"
+            android:text="@string/inversion_desc"
+            android:textAppearance="?android:textAppearanceMedium" />
 
         <TableLayout
             android:id="@+id/Tabla"
@@ -102,56 +102,10 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/Fila1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/table_row_1"
-                android:padding="@dimen/small"
-                android:weightSum="4">
-
-                <empresarial.synapsesdk.com.widget.TextViewFont
-                    android:id="@+id/servicios_column"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="5px"
-                    android:text="SERVICIOS"
-                    android:textColor="@color/table_header"
-                    android:textSize="30sp" />
-
-                <empresarial.synapsesdk.com.widget.TextViewFont
-                    android:id="@+id/invertido_servicios"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:text="78000"
-                    android:textSize="30sp" />
-
-                <empresarial.synapsesdk.com.widget.TextViewFont
-                    android:id="@+id/faltante_servicios"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:text="78000"
-                    android:textSize="30sp" />
-
-                <empresarial.synapsesdk.com.widget.TextViewFont
-                    android:id="@+id/total_servicios"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:text="78000"
-                    android:textSize="30sp" />
-            </TableRow>
-
-            <TableRow
                 android:id="@+id/Fila2"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/table_row_2"
+                android:background="@color/table_row_1"
                 android:padding="@dimen/small">
 
                 <empresarial.synapsesdk.com.widget.TextViewFont
@@ -197,7 +151,7 @@
                 android:id="@+id/Fila3"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/table_row_1"
+                android:background="@color/table_row_2"
                 android:padding="@dimen/small">
 
                 <empresarial.synapsesdk.com.widget.TextViewFont
@@ -243,7 +197,7 @@
                 android:id="@+id/Fila4"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/table_row_2"
+                android:background="@color/table_row_1"
                 android:padding="@dimen/small">
 
 
@@ -277,6 +231,52 @@
 
                 <empresarial.synapsesdk.com.widget.TextViewFont
                     android:id="@+id/total_salarios"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="78000"
+                    android:textSize="30sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/Fila1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/table_row_2"
+                android:padding="@dimen/small"
+                android:weightSum="4">
+
+                <empresarial.synapsesdk.com.widget.TextViewFont
+                    android:id="@+id/servicios_column"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="5px"
+                    android:text="SERVICIOS"
+                    android:textColor="@color/table_header"
+                    android:textSize="30sp" />
+
+                <empresarial.synapsesdk.com.widget.TextViewFont
+                    android:id="@+id/invertido_servicios"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="78000"
+                    android:textSize="30sp" />
+
+                <empresarial.synapsesdk.com.widget.TextViewFont
+                    android:id="@+id/faltante_servicios"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="78000"
+                    android:textSize="30sp" />
+
+                <empresarial.synapsesdk.com.widget.TextViewFont
+                    android:id="@+id/total_servicios"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

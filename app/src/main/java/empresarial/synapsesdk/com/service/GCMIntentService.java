@@ -21,6 +21,7 @@ import empresarial.synapsesdk.com.activity.ProgressActivity;
 import empresarial.synapsesdk.com.activity.ProjectActivity;
 import empresarial.synapsesdk.com.activity.R;
 import empresarial.synapsesdk.com.activity.RecursosActivity;
+import empresarial.synapsesdk.com.activity.UbicacionActivity;
 import empresarial.synapsesdk.com.model.NotificationModel;
 import empresarial.synapsesdk.com.model.Screen;
 
@@ -132,7 +133,7 @@ public class GCMIntentService extends IntentService {
                 intent.setClass(this, DescriptionActivity.class);
                 break;
             case UBICACION:
-                intent.setClass(this, ProjectActivity.class);
+                intent.setClass(this, UbicacionActivity.class);
                 break;
             case GALERIA:
                 intent.setClass(this, GalleryActivity.class);
@@ -145,9 +146,6 @@ public class GCMIntentService extends IntentService {
                 break;
             case INVERSION:
                 intent.setClass(this, ProgressActivity.class);
-                break;
-            case PABELLONES:
-                intent.setClass(this, ProjectActivity.class);
                 break;
             default:
                 intent.setClass(this, ProjectActivity.class);

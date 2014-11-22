@@ -105,7 +105,7 @@ public abstract class ScreenSharingActivity extends Activity {
         public void setAdapters() {
             autoText11.setAdapter(adapter);
             User user = AccountUtils.getUserData(ScreenSharingActivity.this);
-            autoText11.setText(user.getUsername());
+            autoText11.setText(user.getNombre());
             pickUser(user, "1_1");
 
             autoText12.setAdapter(adapter);

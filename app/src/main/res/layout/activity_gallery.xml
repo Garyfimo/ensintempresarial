@@ -8,13 +8,11 @@
     <RelativeLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/normal"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/normal">
+        android:layout_height="match_parent">
 
         <GridView
+            android:clipToPadding="false"
+            android:padding="@dimen/normal"
             android:id="@+id/grid"
             android:stretchMode="columnWidth"
             android:layout_width="match_parent"

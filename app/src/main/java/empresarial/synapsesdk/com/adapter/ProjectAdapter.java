@@ -58,12 +58,11 @@ public class ProjectAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         ProjectViewHolder holder;
-        LayoutInflater inflater = (LayoutInflater) mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = LayoutInflater.from(mContext);
 
-        if(view != null){
+        if (view != null) {
             holder = (ProjectViewHolder) view.getTag();
-        }else{
+        } else {
             view = inflater.inflate(R.layout.project_row, parent, false);
             holder = new ProjectViewHolder(view);
             view.setTag(holder);
