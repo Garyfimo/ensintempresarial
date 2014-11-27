@@ -14,7 +14,9 @@
     <string name="title_activity_image">Imagen</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-
     <string name="inversion_title">Inversión</string>
     <string name="inversion_desc">En esta pantalla se podrá analizar todas las inversiones realizadas en el proyecto. Asimismo, la cantidad ya utilizada del monto total destinado.</string>
+    <string name="title_pabellon_list">Pabellones</string>
+    <string name="title_pabellon_detail">Pabellon Detail</string>
+
 </resources>

@@ -5,7 +5,8 @@
     android:background="@drawable/card_background"
     android:id="@+id/plan_row"
     android:layout_margin="3dp"
-    android:padding="2dp">
+    android:padding="2dp"
+    android:paddingBottom="@dimen/normal">
 
     <empresarial.synapsesdk.com.widget.TextViewFont
         android:layout_width="wrap_content"
@@ -54,6 +55,7 @@
         android:layout_below="@+id/avance"
         android:paddingTop="@dimen/mini"
         android:paddingLeft="@dimen/normal"
+        android:layout_marginBottom="@dimen/normal"
         android:paddingRight="@dimen/normal"
         android:scrollbarSize="@dimen/normal"
         android:layout_alignParentLeft="true"

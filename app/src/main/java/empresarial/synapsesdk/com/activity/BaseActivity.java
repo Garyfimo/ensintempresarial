@@ -139,7 +139,7 @@ public abstract class BaseActivity extends Activity {
         mNavDrawerItems.add(Utilitario.PLAN);
         mNavDrawerItems.add(Utilitario.RECURSOS);
         mNavDrawerItems.add(Utilitario.INVERSION);
-        //mNavDrawerItems.add(Utilitario.PABELLONES);
+        mNavDrawerItems.add(Utilitario.PABELLONES);
         createNavDrawerItems();
     }
 
@@ -314,6 +314,10 @@ public abstract class BaseActivity extends Activity {
                 finish();
                 break;
             case Utilitario.PABELLONES:
+                Intent intentPabellon = new Intent(BaseActivity.this, PabellonListActivity.class);
+                intentPabellon.putExtra("id", project_id);
+                startActivity(intentPabellon);
+                finish();
                 break;
             default:
                 break;

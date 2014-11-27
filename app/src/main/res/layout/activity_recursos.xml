@@ -18,6 +18,7 @@
         android:layout_marginRight="40dp"
         android:horizontalSpacing="@dimen/normal"
         android:verticalSpacing="@dimen/normal"
+        android:paddingBottom="@dimen/normal"
         android:paddingTop="25dp"
         android:gravity="center"
         android:columnWidth="100dp"

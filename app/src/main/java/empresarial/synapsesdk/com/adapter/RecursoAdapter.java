@@ -68,6 +68,7 @@ public class RecursoAdapter extends BaseAdapter {
         holder.titulo.setText(recursos.get(i).getDescripcion());
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         lp.setMargins(0, 0 , 10, 0);
+        holder.linear.removeAllViews();
         for(int j = 0; j < recursos.get(i).getNumImagenes();j++)
         {
             ImageView image = new ImageView(context);

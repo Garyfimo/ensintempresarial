@@ -16,6 +16,7 @@ import empresarial.synapsesdk.com.Config;
 import empresarial.synapsesdk.com.activity.DescriptionActivity;
 import empresarial.synapsesdk.com.activity.GalleryActivity;
 import empresarial.synapsesdk.com.activity.ImageActivity;
+import empresarial.synapsesdk.com.activity.PabellonListActivity;
 import empresarial.synapsesdk.com.activity.PlanActivity;
 import empresarial.synapsesdk.com.activity.ProgressActivity;
 import empresarial.synapsesdk.com.activity.ProjectActivity;
@@ -146,6 +147,9 @@ public class GCMIntentService extends IntentService {
                 break;
             case INVERSION:
                 intent.setClass(this, ProgressActivity.class);
+                break;
+            case PABELLONES:
+                intent.setClass(this, PabellonListActivity.class);
                 break;
             default:
                 intent.setClass(this, ProjectActivity.class);
